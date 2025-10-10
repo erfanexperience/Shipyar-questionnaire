@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shippyar Early Access & Giveaway</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page" class="page active">
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <div class="hero-title-container">
+                        <img src="Logo.png" alt="Shippyar Logo" class="hero-logo">
+                        <h1 class="hero-title">Early Access & Giveaway</h1>
+                    </div>
+                    <p class="hero-subtitle">Be among the first to experience Shippyar.</p>
+                    <p class="hero-description">Connect with trusted travelers, ship smarter, and shape the future of global delivery.</p>
+                    <p class="hero-note">Complete this short form (under 3 minutes) to join early access and enter our giveaway for <strong>10 × $25 Amazon Gift Cards</strong>.</p>
+                    
+                    <button class="cta-button" onclick="startQuestionnaire()">
+                        <span>Start Questionnaire</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="hero-image">
+                    <img src="wall.png" alt="Shippyar Wall" class="wall-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Questionnaire -->
+    <div id="questionnaire" class="page">
+        <div class="questionnaire-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            
+            <div class="question-counter">
+                <span id="current-question">1</span> of <span id="total-questions">28</span>
+            </div>
+            
+            <div class="question-content" id="question-content">
+                <!-- Questions will be dynamically loaded here -->
+            </div>
+            
+            <div class="question-navigation">
+                <button class="nav-button prev-button" id="prev-button" onclick="previousQuestion()" disabled>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Previous
+                </button>
+                <button class="nav-button next-button" id="next-button" onclick="nextQuestion()">
+                    Next
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thank You Page -->
+    <div id="thank-you" class="page">
+        <div class="thank-you-container">
+            <div class="success-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22,4 12,14.01 9,11.01"/>
+                </svg>
+            </div>
+            <h2 class="thank-you-title">🎉 Thank You!</h2>
+            <p class="thank-you-message">You're officially part of the Shippyar Early Access community and entered in our $25 Amazon Gift Card giveaway.</p>
+            <p class="thank-you-date">Winners will be announced on [DATE].</p>
+            <p class="thank-you-social">Follow us on LinkedIn, Instagram, and Telegram for more chances to win and get the latest updates!</p>
+            
+            <div class="social-links">
+                <a href="#" class="social-link">LinkedIn</a>
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">Telegram</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
