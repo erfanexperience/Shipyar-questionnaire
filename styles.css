@@ -454,6 +454,47 @@ body::before {
         margin-bottom: 15px;
     }
     
+    /* Make decorative elements bigger on tablet too */
+    .hero-section::after {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .hero-section::before {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .hero-content::before {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .hero-content::after {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .hero-title-container::before {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .hero-title-container::after {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .cta-button::before {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .cta-button::after {
+        width: 35px;
+        height: 35px;
+    }
+    
     .hero-title {
         font-size: 2rem;
         margin-bottom: 10px;
@@ -741,59 +782,63 @@ body::before {
         max-width: 250px;
     }
     
-    /* Adjust decorative elements for smaller screens */
+    /* Adjust decorative elements for smaller screens - make them bigger */
     .hero-section::after {
-        width: 35px;
-        height: 35px;
+        width: 55px;
+        height: 55px;
         top: 6%;
         right: 2%;
     }
     
     .hero-section::before {
-        width: 28px;
-        height: 28px;
-        bottom: 12%;
-        left: 3%;
+        width: 80px;
+        height: 80px;
+        top: 2%;
+        left: 2%;
+        opacity: 0.6;
+        animation: floatRotate 13s ease-in-out infinite;
+        transform: rotate(-15deg);
+        --rotation: -15deg;
     }
     
     .hero-content::before {
-        width: 22px;
-        height: 22px;
+        width: 35px;
+        height: 35px;
         top: 20%;
         left: 1%;
     }
     
     .hero-content::after {
-        width: 30px;
-        height: 30px;
+        width: 50px;
+        height: 50px;
         bottom: 6%;
         right: 6%;
     }
     
     .hero-title-container::before {
-        width: 18px;
-        height: 18px;
+        width: 30px;
+        height: 30px;
         top: -15px;
         right: -20px;
     }
     
     .hero-title-container::after {
-        width: 15px;
-        height: 15px;
+        width: 25px;
+        height: 25px;
         bottom: -10px;
         left: -15px;
     }
     
     .cta-button::before {
-        width: 14px;
-        height: 14px;
+        width: 25px;
+        height: 25px;
         top: -12px;
         left: -15px;
     }
     
     .cta-button::after {
-        width: 16px;
-        height: 16px;
+        width: 30px;
+        height: 30px;
         top: -8px;
         right: -10px;
     }
