@@ -1,6 +1,6 @@
-// Questionnaire data structure
+// Questionnaire data structure - Simplified and Dynamic
 const questions = [
-    // Section A - Basic Information
+    // Section A - Basic Information (Always shown)
     {
         id: 1,
         section: "A",
@@ -13,7 +13,7 @@ const questions = [
         id: 2,
         section: "A",
         title: "What's your email address?",
-        description: "We'll use this for early access & giveaway confirmation",
+        description: "🎁 We'll use this to send you your Amazon Gift Card if you win!",
         type: "email",
         required: true,
         placeholder: "Enter your email address"
@@ -22,9 +22,9 @@ const questions = [
         id: 3,
         section: "A",
         title: "Where do you live?",
-        type: "text",
+        type: "location",
         required: true,
-        placeholder: "Country / City of Residence"
+        placeholder: "Start typing your country/city..."
     },
     {
         id: 4,
@@ -34,7 +34,8 @@ const questions = [
         required: true,
         options: [
             "English",
-            "Arabic",
+            "Turkish",
+            "Arabic", 
             "Spanish",
             "French",
             { text: "Other", hasInput: true }
@@ -54,284 +55,122 @@ const questions = [
         ]
     },
     
-    // Section B - About You & Your Lifestyle
+    // Section B - User Type (Determines which path to follow)
     {
         id: 6,
         section: "B",
-        title: "Which best describes you?",
-        description: "Select all that apply",
-        type: "checkbox",
+        title: "🎯 Which best describes you?",
+        description: "This helps us show you the most relevant questions!",
+        type: "radio",
         required: true,
         options: [
-            "Frequent international traveler",
-            "Online store owner / e-commerce seller",
-            "Student living abroad",
-            "Buyer / recipient of items from other countries",
-            "Expat sending items to family back home",
-            "Just exploring / curious about Shippyar"
+            "✈️ I'm a frequent traveler",
+            "📦 I ship packages regularly", 
+            "🛍️ I buy items from other countries",
+            "🤔 Just exploring - not sure yet"
         ]
     },
+    
+    // Section C - Age & Motivation
     {
         id: 7,
-        section: "B",
+        section: "C",
         title: "What's your age group?",
         type: "radio",
         required: true,
         options: ["18–24", "25–34", "35–44", "45–54", "55+"]
     },
+    
+    // Section D - Dynamic Questions Based on User Type
+    // Traveler Questions
     {
         id: 8,
-        section: "B",
-        title: "What's your occupation or industry?",
+        section: "D",
+        title: "✈️ How often do you travel internationally?",
         type: "radio",
         required: true,
-        options: [
-            "Student",
-            "Freelancer / Entrepreneur",
-            "Retail / E-commerce",
-            "Logistics / Shipping",
-            { text: "Other", hasInput: true }
-        ]
+        options: ["Monthly or more", "A few times a year", "Once a year", "Rarely"],
+        conditional: { dependsOn: 6, showIf: ["✈️ I'm a frequent traveler"] }
     },
-    
-    // Section C - Shipping & Shopping Habits
     {
         id: 9,
-        section: "C",
-        title: "How often do you send or receive international packages?",
+        section: "D", 
+        title: "💼 Would you be interested in earning money by carrying packages for others?",
         type: "radio",
         required: true,
-        options: ["Weekly", "Monthly", "A few times a year", "Rarely"]
+        options: ["💰 Yes, sounds great!", "🤔 Maybe, if it's safe", "❌ Not interested"],
+        conditional: { dependsOn: 6, showIf: ["✈️ I'm a frequent traveler"] }
     },
+    
+    // Shipper Questions
     {
         id: 10,
-        section: "C",
-        title: "What types of items do you usually send or receive?",
-        description: "Select up to 3",
-        type: "checkbox",
+        section: "D",
+        title: "📦 How often do you ship packages internationally?",
+        type: "radio", 
         required: true,
-        maxSelections: 3,
-        options: [
-            "Personal items / gifts",
-            "Clothing / accessories",
-            "Electronics",
-            "Business samples / products",
-            "Documents / paperwork",
-            "Food or local products",
-            { text: "Other", hasInput: true }
-        ]
+        options: ["Weekly", "Monthly", "A few times a year", "Rarely"],
+        conditional: { dependsOn: 6, showIf: ["📦 I ship packages regularly"] }
     },
     {
         id: 11,
-        section: "C",
-        title: "What's the typical value of items you ship or receive?",
+        section: "D",
+        title: "💸 What's your biggest shipping challenge?",
         type: "radio",
         required: true,
-        options: ["Under $50", "$50–200", "$200–500", "$500+"]
+        options: ["💸 High costs", "⏰ Slow delivery", "😰 Worried about safety", "📋 Complex customs"],
+        conditional: { dependsOn: 6, showIf: ["📦 I ship packages regularly"] }
     },
+    
+    // Buyer Questions
     {
         id: 12,
-        section: "C",
-        title: "Where do you most often ship to/from?",
-        type: "text",
-        required: true,
-        placeholder: "From Country / To Country"
-    },
-    {
-        id: 13,
-        section: "C",
-        title: "How do you currently handle shipping or delivery?",
-        type: "radio",
-        required: true,
-        options: [
-            "Traditional courier (DHL, FedEx, UPS, etc.)",
-            "Postal services",
-            "Hand-carried by friends or family",
-            "I usually don't ship internationally"
-        ]
-    },
-    
-    // Section D - Travelers Only
-    {
-        id: 14,
         section: "D",
-        title: "Do you travel internationally?",
-        type: "radio",
-        required: true,
-        options: ["Yes, regularly", "Occasionally", "No"]
-    },
-    {
-        id: 15,
-        section: "D",
-        title: "How many trips do you take per year?",
-        type: "radio",
-        required: true,
-        options: ["1–2", "3–5", "6–10", "10+"],
-        conditional: { dependsOn: 14, showIf: ["Yes, regularly", "Occasionally"] }
-    },
-    {
-        id: 16,
-        section: "D",
-        title: "What's your typical luggage situation when you travel?",
-        type: "radio",
-        required: true,
-        options: [
-            "Always have extra luggage space",
-            "Sometimes have space",
-            "Usually full",
-            "Depends on the trip"
-        ],
-        conditional: { dependsOn: 14, showIf: ["Yes, regularly", "Occasionally"] }
-    },
-    {
-        id: 17,
-        section: "D",
-        title: "Would you be open to earning money by sharing extra luggage space with verified senders?",
-        type: "radio",
-        required: true,
-        options: [
-            "Definitely",
-            "Maybe, if it feels safe",
-            "Not sure yet"
-        ],
-        conditional: { dependsOn: 14, showIf: ["Yes, regularly", "Occasionally"] }
-    },
-    
-    // Section E - Trust, Safety & User Expectations
-    {
-        id: 18,
-        section: "E",
-        title: "What worries you most about international shipping?",
-        type: "radio",
-        required: true,
-        options: [
-            "High shipping costs",
-            "Delays or uncertainty",
-            "Lost / damaged items",
-            "Customs and regulations",
-            "Lack of trust in unknown people"
-        ]
-    },
-    {
-        id: 19,
-        section: "E",
-        title: "If you could send packages through verified travelers, how comfortable would you feel?",
-        type: "radio",
-        required: true,
-        options: [
-            "Very comfortable",
-            "Somewhat comfortable",
-            "Neutral",
-            "Not comfortable"
-        ]
-    },
-    {
-        id: 20,
-        section: "E",
-        title: "What would make you trust a platform like Shippyar the most?",
-        description: "Pick up to 3",
+        title: "🛍️ What do you usually buy from other countries?",
         type: "checkbox",
         required: true,
         maxSelections: 3,
-        options: [
-            "Verified traveler identity & ID check",
-            "Insurance or package coverage",
-            "Live tracking system",
-            "Secure escrow payment",
-            "Ratings & user reviews",
-            "24/7 customer support",
-            "Built-in chat between sender & traveler"
-        ]
+        options: ["👕 Clothing & accessories", "📱 Electronics", "🎁 Gifts", "🍯 Local products", "📚 Books & media"],
+        conditional: { dependsOn: 6, showIf: ["🛍️ I buy items from other countries"] }
     },
+    
+    // Universal Questions
     {
-        id: 21,
+        id: 13,
         section: "E",
-        title: "What matters most to you when shipping?",
-        type: "radio",
+        title: "🔒 What would make you trust Shippyar most?",
+        description: "Pick your top 2",
+        type: "checkbox",
         required: true,
+        maxSelections: 2,
         options: [
-            "Cost savings",
-            "Speed of delivery",
-            "Safety & reliability",
-            "Flexibility (choose traveler / schedule)"
-        ]
-    },
-    
-    // Section F - Product Feedback & Interest
-    {
-        id: 22,
-        section: "F",
-        title: "What feature would you find most useful in Shippyar?",
-        type: "radio",
-        required: true,
-        options: [
-            "Smart matching (find travelers going your way)",
-            "Real-time tracking & updates",
-            "Transparent pricing",
-            "In-app communication",
-            "Built-in insurance",
-            "Traveler reward system"
+            "🆔 Verified user profiles",
+            "🛡️ Insurance coverage", 
+            "📍 Live tracking",
+            "⭐ User reviews",
+            "💬 Direct chat with users"
         ]
     },
     {
-        id: 23,
+        id: 14,
         section: "F",
-        title: "Which side are you most interested in?",
+        title: "🎁 How excited are you to try Shippyar?",
         type: "radio",
         required: true,
-        options: [
-            "I want to send packages",
-            "I want to carry packages and earn",
-            "Both"
-        ]
+        options: ["🚀 Super excited!", "😊 Pretty excited", "🤔 Curious to try", "😐 Not sure yet"]
     },
     {
-        id: 24,
-        section: "F",
-        title: "If you could improve one thing about shipping today, what would it be?",
-        type: "textarea",
-        required: true,
-        placeholder: "Share your thoughts..."
-    },
-    {
-        id: 25,
-        section: "F",
-        title: "How likely are you to try Shippyar when it launches?",
-        type: "radio",
-        required: true,
-        options: ["Definitely", "Probably", "Not sure yet", "Probably not"]
-    },
-    
-    // Section G - Community & Rewards
-    {
-        id: 26,
+        id: 15,
         section: "G",
-        title: "Follow us for extra giveaway entries:",
+        title: "🎉 Ready to join early access and win prizes?",
+        description: "Follow us for extra chances to win!",
         type: "checkbox",
         required: false,
         options: [
-            "I followed Shippyar on LinkedIn",
-            "I followed Shippyar on Instagram",
-            "I joined Shippyar's Telegram channel"
+            "✅ Yes, send me early access updates!",
+            "📱 I followed on Instagram",
+            "💼 I followed on LinkedIn"
         ]
-    },
-    {
-        id: 27,
-        section: "G",
-        title: "Want to invite friends and earn more chances to win?",
-        type: "radio",
-        required: false,
-        options: ["Yes — send me my unique referral link"]
-    },
-    
-    // Section H - Early Access
-    {
-        id: 28,
-        section: "H",
-        title: "Would you like to join Shippyar's early access group and receive updates?",
-        type: "radio",
-        required: true,
-        options: ["Yes, I'd love to"]
     }
 ];
 
@@ -339,6 +178,15 @@ const questions = [
 let currentQuestionIndex = 0;
 let answers = {};
 let totalQuestions = questions.length;
+let filteredQuestions = [];
+
+// Location suggestions data
+const locationSuggestions = [
+    "United States", "Canada", "United Kingdom", "Germany", "France", "Spain", "Italy", "Netherlands", "Sweden", "Norway",
+    "Australia", "Japan", "South Korea", "Singapore", "United Arab Emirates", "Saudi Arabia", "Turkey", "Brazil", "Mexico", "Argentina",
+    "New York", "Los Angeles", "London", "Paris", "Berlin", "Madrid", "Rome", "Amsterdam", "Stockholm", "Oslo",
+    "Sydney", "Tokyo", "Seoul", "Singapore", "Dubai", "Riyadh", "Istanbul", "São Paulo", "Mexico City", "Buenos Aires"
+];
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
@@ -350,7 +198,25 @@ document.addEventListener('DOMContentLoaded', function() {
 function startQuestionnaire() {
     document.getElementById('landing-page').classList.remove('active');
     document.getElementById('questionnaire').classList.add('active');
+    
+    // Initialize with all questions, filtering will happen after user selects type
+    filteredQuestions = questions;
+    totalQuestions = questions.length;
+    currentQuestionIndex = 0;
+    
     showQuestion(0);
+}
+
+// Filter questions based on user answers
+function filterQuestions() {
+    filteredQuestions = questions.filter(question => {
+        if (!question.conditional) return true;
+        
+        const dependentAnswer = answers[question.conditional.dependsOn];
+        return question.conditional.showIf.includes(dependentAnswer);
+    });
+    
+    totalQuestions = filteredQuestions.length;
 }
 
 // Show specific question
@@ -358,22 +224,7 @@ function showQuestion(index) {
     if (index < 0 || index >= totalQuestions) return;
     
     currentQuestionIndex = index;
-    const question = questions[index];
-    
-    // Check if question should be shown based on conditions
-    if (question.conditional) {
-        const dependentAnswer = answers[question.conditional.dependsOn];
-        if (!question.conditional.showIf.includes(dependentAnswer)) {
-            // Skip this question and go to next
-            if (index < totalQuestions - 1) {
-                showQuestion(index + 1);
-                return;
-            } else {
-                submitQuestionnaire();
-                return;
-            }
-        }
-    }
+    const question = filteredQuestions[index];
     
     updateProgressBar();
     updateQuestionCounter();
@@ -397,6 +248,18 @@ function renderQuestion(question) {
                    placeholder="${question.placeholder || ''}"
                    value="${answers[question.id] || ''}"
                    onchange="saveAnswer(${question.id}, this.value)">
+        `;
+    } else if (question.type === 'location') {
+        html += `
+            <div class="location-container">
+                <input type="text" 
+                       class="input-field location-input" 
+                       placeholder="${question.placeholder || ''}"
+                       value="${answers[question.id] || ''}"
+                       oninput="handleLocationInput(this, ${question.id})"
+                       onchange="saveAnswer(${question.id}, this.value)">
+                <div class="location-suggestions" id="suggestions-${question.id}"></div>
+            </div>
         `;
     } else if (question.type === 'textarea') {
         html += `
@@ -470,6 +333,46 @@ function renderQuestion(question) {
 // Save answer
 function saveAnswer(questionId, value) {
     answers[questionId] = value;
+    
+    // If this is question 6 (user type), filter questions
+    if (questionId === 6) {
+        filterQuestions();
+        // Reset to first question of filtered set
+        currentQuestionIndex = 0;
+        showQuestion(0);
+        return;
+    }
+}
+
+// Handle location input with auto-suggestions
+function handleLocationInput(input, questionId) {
+    const value = input.value.toLowerCase();
+    const suggestions = document.getElementById(`suggestions-${questionId}`);
+    
+    if (value.length < 2) {
+        suggestions.innerHTML = '';
+        return;
+    }
+    
+    const matches = locationSuggestions.filter(location => 
+        location.toLowerCase().includes(value)
+    ).slice(0, 5);
+    
+    if (matches.length > 0) {
+        suggestions.innerHTML = matches.map(match => 
+            `<div class="suggestion-item" onclick="selectSuggestion('${match}', ${questionId})">${match}</div>`
+        ).join('');
+    } else {
+        suggestions.innerHTML = '';
+    }
+}
+
+// Select a location suggestion
+function selectSuggestion(location, questionId) {
+    const input = document.querySelector(`#suggestions-${questionId}`).previousElementSibling;
+    input.value = location;
+    saveAnswer(questionId, location);
+    document.getElementById(`suggestions-${questionId}`).innerHTML = '';
 }
 
 // Select radio option

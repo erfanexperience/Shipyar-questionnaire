@@ -315,6 +315,44 @@ body::before {
     box-shadow: 0 0 0 3px rgba(62, 149, 208, 0.1);
 }
 
+/* Location suggestions styling */
+.location-container {
+    position: relative;
+    width: 100%;
+}
+
+.location-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #5BA3D9;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(62, 149, 208, 0.1);
+}
+
+.suggestion-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #e2e8f0;
+    transition: background-color 0.2s ease;
+    color: #4a5568;
+}
+
+.suggestion-item:hover {
+    background-color: rgba(62, 149, 208, 0.1);
+    color: #3E95D0;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
 .input-field::placeholder {
     color: #a0aec0;
 }
