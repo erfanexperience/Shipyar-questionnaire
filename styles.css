@@ -315,6 +315,10 @@ body::before {
     box-shadow: 0 0 0 3px rgba(62, 149, 208, 0.1);
 }
 
+.input-field::placeholder {
+    color: #a0aec0;
+}
+
 /* Location suggestions styling */
 .location-container {
     position: relative;
@@ -351,10 +355,6 @@ body::before {
 
 .suggestion-item:last-child {
     border-bottom: none;
-}
-
-.input-field::placeholder {
-    color: #a0aec0;
 }
 
 .question-navigation {

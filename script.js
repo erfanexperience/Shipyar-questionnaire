@@ -1,4 +1,32 @@
-// Questionnaire data structure - Simplified and Dynamic
+// Country and city data for auto-suggestions
+const countries = [
+    "United States", "Canada", "United Kingdom", "Germany", "France", "Spain", "Italy", "Netherlands", "Belgium", "Switzerland",
+    "Austria", "Sweden", "Norway", "Denmark", "Finland", "Poland", "Czech Republic", "Hungary", "Portugal", "Greece",
+    "Turkey", "Russia", "Ukraine", "Romania", "Bulgaria", "Croatia", "Slovenia", "Slovakia", "Lithuania", "Latvia",
+    "Estonia", "Ireland", "Iceland", "Luxembourg", "Malta", "Cyprus", "Australia", "New Zealand", "Japan", "South Korea",
+    "China", "India", "Singapore", "Malaysia", "Thailand", "Philippines", "Indonesia", "Vietnam", "Brazil", "Argentina",
+    "Chile", "Mexico", "Colombia", "Peru", "Uruguay", "Paraguay", "Bolivia", "Ecuador", "Venezuela", "South Africa",
+    "Egypt", "Morocco", "Nigeria", "Kenya", "Ghana", "Tunisia", "Algeria", "Israel", "Saudi Arabia", "UAE", "Qatar",
+    "Kuwait", "Bahrain", "Oman", "Jordan", "Lebanon", "Iraq", "Iran", "Pakistan", "Bangladesh", "Sri Lanka"
+];
+
+const cities = [
+    "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose",
+    "Austin", "Jacksonville", "Fort Worth", "Columbus", "Charlotte", "San Francisco", "Indianapolis", "Seattle", "Denver", "Washington",
+    "Boston", "El Paso", "Nashville", "Detroit", "Oklahoma City", "Portland", "Las Vegas", "Memphis", "Louisville", "Baltimore",
+    "Milwaukee", "Albuquerque", "Tucson", "Fresno", "Sacramento", "Mesa", "Kansas City", "Atlanta", "Long Beach", "Colorado Springs",
+    "Raleigh", "Miami", "Virginia Beach", "Omaha", "Oakland", "Minneapolis", "Tulsa", "Arlington", "Tampa", "New Orleans",
+    "London", "Birmingham", "Manchester", "Glasgow", "Liverpool", "Leeds", "Sheffield", "Edinburgh", "Bristol", "Leicester",
+    "Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Strasbourg", "Montpellier", "Bordeaux", "Lille",
+    "Berlin", "Hamburg", "Munich", "Cologne", "Frankfurt", "Stuttgart", "Düsseldorf", "Dortmund", "Essen", "Leipzig",
+    "Madrid", "Barcelona", "Valencia", "Seville", "Zaragoza", "Málaga", "Murcia", "Palma", "Las Palmas", "Bilbao",
+    "Rome", "Milan", "Naples", "Turin", "Palermo", "Genoa", "Bologna", "Florence", "Bari", "Catania",
+    "Istanbul", "Ankara", "Izmir", "Bursa", "Antalya", "Adana", "Konya", "Gaziantep", "Mersin", "Diyarbakır",
+    "Tokyo", "Yokohama", "Osaka", "Nagoya", "Sapporo", "Fukuoka", "Kobe", "Kawasaki", "Kyoto", "Saitama",
+    "Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Gold Coast", "Newcastle", "Canberra", "Wollongong", "Hobart"
+];
+
+// Questionnaire data structure - Dynamic and reduced to 15 questions max
 const questions = [
     // Section A - Basic Information (Always shown)
     {
@@ -13,7 +41,7 @@ const questions = [
         id: 2,
         section: "A",
         title: "What's your email address?",
-        description: "🎁 We'll use this to send you your Amazon Gift Card if you win!",
+        description: "📧 We'll use this for early access & giveaway confirmation",
         type: "email",
         required: true,
         placeholder: "Enter your email address"
@@ -22,9 +50,10 @@ const questions = [
         id: 3,
         section: "A",
         title: "Where do you live?",
+        description: "🌍 Help us connect you with local travelers",
         type: "location",
         required: true,
-        placeholder: "Start typing your country/city..."
+        placeholder: "Start typing your country or city..."
     },
     {
         id: 4,
@@ -55,7 +84,7 @@ const questions = [
         ]
     },
     
-    // Section B - User Type (Determines which path to follow)
+    // Section B - User Type (Determines which questions to show next)
     {
         id: 6,
         section: "B",
@@ -64,113 +93,173 @@ const questions = [
         type: "radio",
         required: true,
         options: [
-            "✈️ I'm a frequent traveler",
-            "📦 I ship packages regularly", 
-            "🛍️ I buy items from other countries",
-            "🤔 Just exploring - not sure yet"
-        ]
+            "✈️ Frequent international traveler",
+            "📦 Online store owner / e-commerce seller", 
+            "🎓 Student living abroad",
+            "🛍️ Buyer / recipient of items from other countries",
+            "👨‍👩‍👧‍👦 Expat sending items to family back home",
+            "🔍 Just exploring / curious about Shippyar"
+        ],
+        branching: true // This question determines the path
     },
-    
-    // Section C - Age & Motivation
     {
         id: 7,
-        section: "C",
+        section: "B",
         title: "What's your age group?",
         type: "radio",
         required: true,
         options: ["18–24", "25–34", "35–44", "45–54", "55+"]
     },
     
-    // Section D - Dynamic Questions Based on User Type
-    // Traveler Questions
+    // Dynamic Questions Based on User Type
+    // For Travelers
     {
         id: 8,
-        section: "D",
+        section: "T",
         title: "✈️ How often do you travel internationally?",
         type: "radio",
         required: true,
-        options: ["Monthly or more", "A few times a year", "Once a year", "Rarely"],
-        conditional: { dependsOn: 6, showIf: ["✈️ I'm a frequent traveler"] }
+        showIf: ["✈️ Frequent international traveler"],
+        options: ["Weekly", "Monthly", "A few times a year", "Rarely"]
     },
     {
         id: 9,
-        section: "D", 
-        title: "💼 Would you be interested in earning money by carrying packages for others?",
+        section: "T", 
+        title: "💼 What's your typical luggage situation when you travel?",
         type: "radio",
         required: true,
-        options: ["💰 Yes, sounds great!", "🤔 Maybe, if it's safe", "❌ Not interested"],
-        conditional: { dependsOn: 6, showIf: ["✈️ I'm a frequent traveler"] }
+        showIf: ["✈️ Frequent international traveler"],
+        options: [
+            "Always have extra luggage space",
+            "Sometimes have space",
+            "Usually full",
+            "Depends on the trip"
+        ]
     },
-    
-    // Shipper Questions
     {
         id: 10,
-        section: "D",
-        title: "📦 How often do you ship packages internationally?",
-        type: "radio", 
-        required: true,
-        options: ["Weekly", "Monthly", "A few times a year", "Rarely"],
-        conditional: { dependsOn: 6, showIf: ["📦 I ship packages regularly"] }
-    },
-    {
-        id: 11,
-        section: "D",
-        title: "💸 What's your biggest shipping challenge?",
+        section: "T",
+        title: "💰 Would you be open to earning money by sharing extra luggage space?",
         type: "radio",
         required: true,
-        options: ["💸 High costs", "⏰ Slow delivery", "😰 Worried about safety", "📋 Complex customs"],
-        conditional: { dependsOn: 6, showIf: ["📦 I ship packages regularly"] }
+        showIf: ["✈️ Frequent international traveler"],
+        options: [
+            "Definitely! 💸",
+            "Maybe, if it feels safe",
+            "Not sure yet"
+        ]
     },
     
-    // Buyer Questions
+    // For Shippers/Sellers
+    {
+        id: 11,
+        section: "S",
+        title: "📦 How often do you send international packages?",
+        type: "radio",
+        required: true,
+        showIf: ["📦 Online store owner / e-commerce seller", "👨‍👩‍👧‍👦 Expat sending items to family back home"],
+        options: ["Weekly", "Monthly", "A few times a year", "Rarely"]
+    },
     {
         id: 12,
-        section: "D",
-        title: "🛍️ What do you usually buy from other countries?",
+        section: "S",
+        title: "🛍️ What types of items do you usually send?",
+        description: "Select up to 3",
         type: "checkbox",
         required: true,
         maxSelections: 3,
-        options: ["👕 Clothing & accessories", "📱 Electronics", "🎁 Gifts", "🍯 Local products", "📚 Books & media"],
-        conditional: { dependsOn: 6, showIf: ["🛍️ I buy items from other countries"] }
-    },
-    
-    // Universal Questions
-    {
-        id: 13,
-        section: "E",
-        title: "🔒 What would make you trust Shippyar most?",
-        description: "Pick your top 2",
-        type: "checkbox",
-        required: true,
-        maxSelections: 2,
+        showIf: ["📦 Online store owner / e-commerce seller", "👨‍👩‍👧‍👦 Expat sending items to family back home"],
         options: [
-            "🆔 Verified user profiles",
-            "🛡️ Insurance coverage", 
-            "📍 Live tracking",
-            "⭐ User reviews",
-            "💬 Direct chat with users"
+            "Personal items / gifts",
+            "Clothing / accessories",
+            "Electronics",
+            "Business samples / products",
+            "Documents / paperwork",
+            "Food or local products",
+            { text: "Other", hasInput: true }
         ]
     },
     {
-        id: 14,
-        section: "F",
-        title: "🎁 How excited are you to try Shippyar?",
+        id: 13,
+        section: "S",
+        title: "💵 What's the typical value of items you ship?",
         type: "radio",
         required: true,
-        options: ["🚀 Super excited!", "😊 Pretty excited", "🤔 Curious to try", "😐 Not sure yet"]
+        showIf: ["📦 Online store owner / e-commerce seller", "👨‍👩‍👧‍👦 Expat sending items to family back home"],
+        options: ["Under $50", "$50–200", "$200–500", "$500+"]
+    },
+    
+    // For Buyers
+    {
+        id: 14,
+        section: "B",
+        title: "🛒 How often do you receive international packages?",
+        type: "radio",
+        required: true,
+        showIf: ["🛍️ Buyer / recipient of items from other countries", "🎓 Student living abroad"],
+        options: ["Weekly", "Monthly", "A few times a year", "Rarely"]
     },
     {
         id: 15,
+        section: "B",
+        title: "🎁 What types of items do you usually receive?",
+        description: "Select up to 3",
+        type: "checkbox",
+        required: true,
+        maxSelections: 3,
+        showIf: ["🛍️ Buyer / recipient of items from other countries", "🎓 Student living abroad"],
+        options: [
+            "Personal items / gifts",
+            "Clothing / accessories",
+            "Electronics",
+            "Business samples / products",
+            "Documents / paperwork",
+            "Food or local products",
+            { text: "Other", hasInput: true }
+        ]
+    },
+    
+    // Final Questions (Always shown)
+    {
+        id: 16,
+        section: "F",
+        title: "🎯 What matters most to you when shipping?",
+        type: "radio",
+        required: true,
+        options: [
+            "💰 Cost savings",
+            "⚡ Speed of delivery",
+            "🔒 Safety & reliability",
+            "🎛️ Flexibility (choose traveler / schedule)"
+        ]
+    },
+    {
+        id: 17,
+        section: "F",
+        title: "🚀 How likely are you to try Shippyar when it launches?",
+        type: "radio",
+        required: true,
+        options: ["Definitely! 🎉", "Probably", "Not sure yet", "Probably not"]
+    },
+    {
+        id: 18,
         section: "G",
-        title: "🎉 Ready to join early access and win prizes?",
-        description: "Follow us for extra chances to win!",
+        title: "🎁 Follow us for extra giveaway entries:",
         type: "checkbox",
         required: false,
         options: [
-            "✅ Yes, send me early access updates!",
-            "📱 I followed on Instagram",
-            "💼 I followed on LinkedIn"
+            "✅ I followed Shippyar on LinkedIn",
+            "✅ I followed Shippyar on Instagram", 
+            "✅ I joined Shippyar's Telegram channel"
         ]
+    },
+    {
+        id: 19,
+        section: "H",
+        title: "🎯 Would you like to join Shippyar's early access group?",
+        type: "radio",
+        required: true,
+        options: ["Yes, I'd love to! 🚀"]
     }
 ];
 
@@ -179,14 +268,7 @@ let currentQuestionIndex = 0;
 let answers = {};
 let totalQuestions = questions.length;
 let filteredQuestions = [];
-
-// Location suggestions data
-const locationSuggestions = [
-    "United States", "Canada", "United Kingdom", "Germany", "France", "Spain", "Italy", "Netherlands", "Sweden", "Norway",
-    "Australia", "Japan", "South Korea", "Singapore", "United Arab Emirates", "Saudi Arabia", "Turkey", "Brazil", "Mexico", "Argentina",
-    "New York", "Los Angeles", "London", "Paris", "Berlin", "Madrid", "Rome", "Amsterdam", "Stockholm", "Oslo",
-    "Sydney", "Tokyo", "Seoul", "Singapore", "Dubai", "Riyadh", "Istanbul", "São Paulo", "Mexico City", "Buenos Aires"
-];
+let userType = null;
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
@@ -194,34 +276,39 @@ document.addEventListener('DOMContentLoaded', function() {
     updateQuestionCounter();
 });
 
+// Filter questions based on user type
+function filterQuestions() {
+    filteredQuestions = questions.filter(question => {
+        // Always show basic questions (1-7)
+        if (question.id <= 7) return true;
+        
+        // Show questions based on user type
+        if (question.showIf && userType) {
+            return question.showIf.includes(userType);
+        }
+        
+        // Show final questions (16-19) to everyone
+        if (question.id >= 16) return true;
+        
+        return false;
+    });
+    
+    totalQuestions = filteredQuestions.length;
+    updateQuestionCounter();
+}
+
 // Start questionnaire
 function startQuestionnaire() {
     document.getElementById('landing-page').classList.remove('active');
     document.getElementById('questionnaire').classList.add('active');
-    
-    // Initialize with all questions, filtering will happen after user selects type
-    filteredQuestions = questions;
-    totalQuestions = questions.length;
-    currentQuestionIndex = 0;
-    
-    showQuestion(0);
-}
-
-// Filter questions based on user answers
-function filterQuestions() {
-    filteredQuestions = questions.filter(question => {
-        if (!question.conditional) return true;
-        
-        const dependentAnswer = answers[question.conditional.dependsOn];
-        return question.conditional.showIf.includes(dependentAnswer);
-    });
-    
+    filteredQuestions = questions.filter(q => q.id <= 7); // Start with basic questions
     totalQuestions = filteredQuestions.length;
+    showQuestion(0);
 }
 
 // Show specific question
 function showQuestion(index) {
-    if (index < 0 || index >= totalQuestions) return;
+    if (index < 0 || index >= filteredQuestions.length) return;
     
     currentQuestionIndex = index;
     const question = filteredQuestions[index];
@@ -247,18 +334,20 @@ function renderQuestion(question) {
                    class="input-field" 
                    placeholder="${question.placeholder || ''}"
                    value="${answers[question.id] || ''}"
-                   onchange="saveAnswer(${question.id}, this.value)">
+                   onchange="saveAnswer(${question.id}, this.value)"
+                   required="${question.required}">
         `;
     } else if (question.type === 'location') {
         html += `
             <div class="location-container">
                 <input type="text" 
-                       class="input-field location-input" 
+                       class="input-field" 
                        placeholder="${question.placeholder || ''}"
                        value="${answers[question.id] || ''}"
-                       oninput="handleLocationInput(this, ${question.id})"
-                       onchange="saveAnswer(${question.id}, this.value)">
-                <div class="location-suggestions" id="suggestions-${question.id}"></div>
+                       oninput="handleLocationInput(${question.id}, this.value)"
+                       onchange="saveAnswer(${question.id}, this.value)"
+                       required="${question.required}">
+                <div class="location-suggestions" id="suggestions-${question.id}" style="display: none;"></div>
             </div>
         `;
     } else if (question.type === 'textarea') {
@@ -266,7 +355,8 @@ function renderQuestion(question) {
             <textarea class="input-field" 
                       placeholder="${question.placeholder || ''}"
                       rows="4"
-                      onchange="saveAnswer(${question.id}, this.value)">${answers[question.id] || ''}</textarea>
+                      onchange="saveAnswer(${question.id}, this.value)"
+                      required="${question.required}">${answers[question.id] || ''}</textarea>
         `;
     } else if (question.type === 'radio') {
         html += '<div class="question-options">';
@@ -334,45 +424,57 @@ function renderQuestion(question) {
 function saveAnswer(questionId, value) {
     answers[questionId] = value;
     
-    // If this is question 6 (user type), filter questions
+    // Check if this is the user type question (question 6)
     if (questionId === 6) {
+        userType = value;
+        // Filter questions and update the questionnaire
         filterQuestions();
-        // Reset to first question of filtered set
-        currentQuestionIndex = 0;
-        showQuestion(0);
-        return;
+        // Update current question index to continue with filtered questions
+        currentQuestionIndex = filteredQuestions.findIndex(q => q.id === questionId);
     }
 }
 
-// Handle location input with auto-suggestions
-function handleLocationInput(input, questionId) {
-    const value = input.value.toLowerCase();
-    const suggestions = document.getElementById(`suggestions-${questionId}`);
-    
+// Handle location input for auto-suggestions
+function handleLocationInput(questionId, value) {
     if (value.length < 2) {
-        suggestions.innerHTML = '';
+        hideSuggestions(questionId);
         return;
     }
     
-    const matches = locationSuggestions.filter(location => 
-        location.toLowerCase().includes(value)
+    const suggestions = [...countries, ...cities].filter(item => 
+        item.toLowerCase().includes(value.toLowerCase())
     ).slice(0, 5);
     
-    if (matches.length > 0) {
-        suggestions.innerHTML = matches.map(match => 
-            `<div class="suggestion-item" onclick="selectSuggestion('${match}', ${questionId})">${match}</div>`
-        ).join('');
-    } else {
-        suggestions.innerHTML = '';
+    showSuggestions(questionId, suggestions);
+}
+
+// Show location suggestions
+function showSuggestions(questionId, suggestions) {
+    const suggestionsDiv = document.getElementById(`suggestions-${questionId}`);
+    if (!suggestionsDiv || suggestions.length === 0) return;
+    
+    suggestionsDiv.innerHTML = suggestions.map(suggestion => 
+        `<div class="suggestion-item" onclick="selectSuggestion(${questionId}, '${suggestion}')">${suggestion}</div>`
+    ).join('');
+    suggestionsDiv.style.display = 'block';
+}
+
+// Hide location suggestions
+function hideSuggestions(questionId) {
+    const suggestionsDiv = document.getElementById(`suggestions-${questionId}`);
+    if (suggestionsDiv) {
+        suggestionsDiv.style.display = 'none';
     }
 }
 
-// Select a location suggestion
-function selectSuggestion(location, questionId) {
-    const input = document.querySelector(`#suggestions-${questionId}`).previousElementSibling;
-    input.value = location;
-    saveAnswer(questionId, location);
-    document.getElementById(`suggestions-${questionId}`).innerHTML = '';
+// Select a suggestion
+function selectSuggestion(questionId, suggestion) {
+    const input = document.querySelector(`input[oninput*="handleLocationInput(${questionId}"]`);
+    if (input) {
+        input.value = suggestion;
+        saveAnswer(questionId, suggestion);
+    }
+    hideSuggestions(questionId);
 }
 
 // Select radio option
@@ -404,7 +506,12 @@ function selectCheckboxOption(questionId, value, hasInput, maxSelections) {
 
 // Navigation functions
 function nextQuestion() {
-    if (currentQuestionIndex < totalQuestions - 1) {
+    // Validate current question before proceeding
+    if (!validateCurrentQuestion()) {
+        return;
+    }
+    
+    if (currentQuestionIndex < filteredQuestions.length - 1) {
         showQuestion(currentQuestionIndex + 1);
     } else {
         submitQuestionnaire();
@@ -417,16 +524,47 @@ function previousQuestion() {
     }
 }
 
+// Validate current question
+function validateCurrentQuestion() {
+    const question = filteredQuestions[currentQuestionIndex];
+    if (!question.required) return true;
+    
+    const answer = answers[question.id];
+    
+    if (!answer || (typeof answer === 'string' && answer.trim() === '')) {
+        alert(`Please answer this question before continuing.`);
+        return false;
+    }
+    
+    if (question.type === 'checkbox' && (!Array.isArray(answer) || answer.length === 0)) {
+        alert(`Please select at least one option.`);
+        return false;
+    }
+    
+    if (question.type === 'email' && answer && !isValidEmail(answer)) {
+        alert(`Please enter a valid email address.`);
+        return false;
+    }
+    
+    return true;
+}
+
+// Email validation
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
 // Update progress bar
 function updateProgressBar() {
-    const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+    const progress = ((currentQuestionIndex + 1) / filteredQuestions.length) * 100;
     document.getElementById('progress-fill').style.width = progress + '%';
 }
 
 // Update question counter
 function updateQuestionCounter() {
     document.getElementById('current-question').textContent = currentQuestionIndex + 1;
-    document.getElementById('total-questions').textContent = totalQuestions;
+    document.getElementById('total-questions').textContent = filteredQuestions.length;
 }
 
 // Update navigation buttons
@@ -436,8 +574,8 @@ function updateNavigationButtons() {
     
     prevButton.disabled = currentQuestionIndex === 0;
     
-    if (currentQuestionIndex === totalQuestions - 1) {
-        nextButton.innerHTML = 'Submit <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>';
+    if (currentQuestionIndex === filteredQuestions.length - 1) {
+        nextButton.innerHTML = '🎉 Submit & Win! <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>';
     } else {
         nextButton.innerHTML = 'Next <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
     }
