@@ -547,19 +547,20 @@ function renderQuestion(question) {
         languages.forEach(lang => {
             const isSelected = answers[question.id] === lang;
             html += `
-                <div class="option ${isSelected ? 'selected' : ''}" onclick="selectLanguage('${lang}')">
+                <div class="option ${isSelected ? 'selected' : ''}" onclick="selectLanguage(${question.id}, '${lang}')">
                     <input type="radio" name="question_${question.id}" value="${lang}" ${isSelected ? 'checked' : ''}>
                     <label>${lang}</label>
                 </div>
             `;
         });
+        const otherSelected = answers[question.id] === 'Other';
         html += `
-            <div class="option ${answers[question.id] && !languages.includes(answers[question.id]) ? 'selected' : ''}" onclick="selectRadioOption(${question.id}, 'Other', true)">
-                <input type="radio" name="question_${question.id}" value="Other">
+            <div class="option ${otherSelected ? 'selected' : ''}" onclick="selectRadioOption(${question.id}, 'Other', true)">
+                <input type="radio" name="question_${question.id}" value="Other" ${otherSelected ? 'checked' : ''}>
                 <label>Other</label>
             </div>
         `;
-        if (answers[question.id] && !languages.includes(answers[question.id]) && answers[question.id] !== 'Other') {
+        if (otherSelected) {
             html += `
                 <input type="text" 
                        class="input-field" 
@@ -639,8 +640,8 @@ function saveAnswer(questionId, value) {
 }
 
 // Select language
-function selectLanguage(language) {
-    answers[4] = language;
+function selectLanguage(questionId, language) {
+    answers[questionId] = language;
     selectedLanguage = language;
     renderQuestion(filteredQuestions[currentQuestionIndex]);
 }
