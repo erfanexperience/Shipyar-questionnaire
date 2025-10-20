@@ -264,8 +264,11 @@ function renderQuestion(question) {
             const hasInput = typeof option === 'object' && option.hasInput;
             const isSelected = answers[question.id] === optionText;
             
+            // Escape quotes in optionText for onclick handler
+            const escapedOption = optionText.replace(/'/g, "\\'");
+            
             html += `
-                <div class="option ${isSelected ? 'selected' : ''}" onclick="selectRadioOption(${question.id}, '${optionText}', ${hasInput}, ${question.isLanguageSelect || false}, ${question.branching || false})">
+                <div class="option ${isSelected ? 'selected' : ''}" onclick="selectRadioOption(${question.id}, '${escapedOption}', ${hasInput}, ${question.isLanguageSelect || false}, ${question.branching || false})">
                     <input type="radio" 
                            name="question_${question.id}" 
                            value="${optionText}"
@@ -374,16 +377,19 @@ function selectRadioOption(questionId, value, hasInput, isLanguageSelect, isBran
     
     // If this is the language selection question
     if (isLanguageSelect) {
-        if (value === "Other" || value === "English") {
+        // Handle English, Other, or any unrecognized language
+        if (value === "Other" || value === "English" || !translations[value]) {
             selectedLanguage = "English";
         } else {
             selectedLanguage = value;
         }
+        console.log('Language selected:', value, '-> Using:', selectedLanguage);
     }
     
     // If this is the user type question (branching)
     if (isBranching) {
         userType = value;
+        console.log('User type selected:', userType);
         filterQuestions();
         // Update current question index to continue with filtered questions
         currentQuestionIndex = filteredQuestions.findIndex(q => q.id === questionId);
