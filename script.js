@@ -543,7 +543,7 @@ function renderQuestion(question) {
         `;
     } else if (question.type === 'language') {
         html += '<div class="question-options">';
-        const languages = ["English", "Turkish", "Arabic", "Spanish", "French"];
+        const languages = ["English", "Turkish", "Arabic", "Spanish", "French", "Other"];
         languages.forEach(lang => {
             const isSelected = answers[question.id] === lang;
             html += `
@@ -553,23 +553,6 @@ function renderQuestion(question) {
                 </div>
             `;
         });
-        const otherSelected = answers[question.id] === 'Other';
-        html += `
-            <div class="option ${otherSelected ? 'selected' : ''}" onclick="selectRadioOption(${question.id}, 'Other', true)">
-                <input type="radio" name="question_${question.id}" value="Other" ${otherSelected ? 'checked' : ''}>
-                <label>Other</label>
-            </div>
-        `;
-        if (otherSelected) {
-            html += `
-                <input type="text" 
-                       class="input-field" 
-                       placeholder="Please specify..."
-                       value="${answers[question.id + '_input'] || ''}"
-                       onchange="saveAnswer(${question.id + '_input'}, this.value)"
-                       style="margin-top: 10px;">
-            `;
-        }
         html += '</div>';
     } else if (question.type === 'usertype') {
         html += '<div class="question-options">';
@@ -642,7 +625,8 @@ function saveAnswer(questionId, value) {
 // Select language
 function selectLanguage(questionId, language) {
     answers[questionId] = language;
-    selectedLanguage = language;
+    // If "Other" is selected, use English for the questionnaire
+    selectedLanguage = (language === "Other") ? "English" : language;
     renderQuestion(filteredQuestions[currentQuestionIndex]);
 }
 
