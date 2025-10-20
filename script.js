@@ -374,6 +374,7 @@ function selectSuggestion(questionId, suggestion) {
 // Select radio option
 function selectRadioOption(questionId, value, hasInput, isLanguageSelect, isBranching) {
     answers[questionId] = value;
+    console.log('Radio option selected:', questionId, value, 'hasInput:', hasInput);
     
     // If this is the language selection question
     if (isLanguageSelect) {
@@ -452,6 +453,15 @@ function validateCurrentQuestion() {
     if (!answer || (typeof answer === 'string' && answer.trim() === '')) {
         alert(`Please answer this question before continuing.`);
         return false;
+    }
+    
+    // Special handling for "Other" options that require additional input
+    if (answer === "Other") {
+        const otherInput = answers[question.id + '_input'];
+        if (!otherInput || otherInput.trim() === '') {
+            alert(`Please specify what "Other" means.`);
+            return false;
+        }
     }
     
     if (question.type === 'checkbox' && (!Array.isArray(answer) || answer.length === 0)) {
