@@ -966,7 +966,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function startQuestionnaire() {
     document.getElementById('landing-page').classList.remove('active');
     document.getElementById('questionnaire').classList.add('active');
-    filteredQuestions = questionStructure.filter(q => q.id <= 7);
+    filterQuestions();
     showQuestion(0);
 }
 
@@ -1099,7 +1099,7 @@ function renderQuestion(question) {
     } else if (question.type === 'checkbox') {
         html += '<div class="question-options">';
         for (let i = 1; i <= question.options; i++) {
-            const optionKey = question.key.includes('item') || question.key === 'q12' || question.key === 'q15' ? `item_opt${i}` : `${question.key}_opt${i}`;
+            const optionKey = question.key.includes('item') || question.key === 'q17' || question.key === 'q25' ? `item_opt${i}` : `${question.key}_opt${i}`;
             if (trans[optionKey]) {
                 const optionText = trans[optionKey];
                 const isSelected = answers[question.id] && answers[question.id].includes(optionText);
