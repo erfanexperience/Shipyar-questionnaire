@@ -445,6 +445,121 @@ body::before {
     margin-bottom: 40px;
 }
 
+/* Discount Code Section */
+.discount-code-section {
+    background: linear-gradient(135deg, rgba(62, 149, 208, 0.1) 0%, rgba(91, 163, 217, 0.05) 100%);
+    border: 2px solid rgba(62, 149, 208, 0.2);
+    border-radius: 20px;
+    padding: 30px;
+    margin: 30px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.discount-code-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(62, 149, 208, 0.05) 0%, transparent 70%);
+    animation: shimmer 3s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmer {
+    0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
+    50% { transform: translateX(100%) translateY(100%) rotate(180deg); }
+}
+
+.discount-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 15px;
+}
+
+.discount-message {
+    font-size: 1rem;
+    color: #4a5568;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.discount-code-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.discount-code {
+    background: linear-gradient(135deg, #3e95d0 0%, #5ba3d9 100%);
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 3px;
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(62, 149, 208, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.discount-code::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: codeShine 2s infinite;
+}
+
+@keyframes codeShine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.copy-button {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #3e95d0;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.copy-button:hover {
+    background: rgba(62, 149, 208, 0.1);
+    border-color: rgba(62, 149, 208, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(62, 149, 208, 0.2);
+}
+
+.copy-button:active {
+    transform: translateY(0);
+}
+
+.discount-info {
+    font-size: 1rem;
+    color: #2d3748;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
 .social-links {
     display: flex;
     gap: 20px;
@@ -891,5 +1006,39 @@ body::before {
     
     .input-field {
         padding: 12px;
+    }
+    
+    /* Discount code mobile styles */
+    .discount-code-section {
+        padding: 20px 15px;
+        margin: 20px 0;
+    }
+    
+    .discount-title {
+        font-size: 1.3rem;
+    }
+    
+    .discount-message {
+        font-size: 0.9rem;
+    }
+    
+    .discount-code-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .discount-code {
+        font-size: 1.5rem;
+        padding: 12px 20px;
+        letter-spacing: 2px;
+    }
+    
+    .copy-button {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .discount-info {
+        font-size: 0.9rem;
     }
 }

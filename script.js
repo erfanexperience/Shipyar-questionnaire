@@ -1308,3 +1308,45 @@ document.addEventListener('keydown', function(e) {
         }
     }
 });
+
+// Copy discount code function
+function copyCode() {
+    const code = 'QUEST';
+    navigator.clipboard.writeText(code).then(function() {
+        // Show success feedback
+        const button = document.querySelector('.copy-button');
+        const originalText = button.innerHTML;
+        button.innerHTML = '✅ Copied!';
+        button.style.background = 'rgba(34, 197, 94, 0.3)';
+        button.style.borderColor = 'rgba(34, 197, 94, 0.5)';
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.style.background = 'rgba(255,255,255,0.2)';
+            button.style.borderColor = 'rgba(255,255,255,0.3)';
+        }, 2000);
+    }).catch(function(err) {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = code;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        // Show success feedback
+        const button = document.querySelector('.copy-button');
+        const originalText = button.innerHTML;
+        button.innerHTML = '✅ Copied!';
+        button.style.background = 'rgba(34, 197, 94, 0.3)';
+        button.style.borderColor = 'rgba(34, 197, 94, 0.5)';
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.style.background = 'rgba(255,255,255,0.2)';
+            button.style.borderColor = 'rgba(255,255,255,0.3)';
+        }, 2000);
+    });
+}
