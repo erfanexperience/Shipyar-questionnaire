@@ -1258,14 +1258,53 @@ function updateNavigationButtons() {
 }
 
 // Submit questionnaire
-function submitQuestionnaire() {
-    console.log('Questionnaire submitted:', answers);
-    console.log('Language:', selectedLanguage);
-    console.log('User Type:', userType);
-    
-    document.getElementById('questionnaire').classList.remove('active');
-    document.getElementById('thank-you').classList.add('active');
-    window.scrollTo(0, 0);
+async function submitQuestionnaire() {
+    try {
+        // Prepare data for submission
+        const submissionData = {
+            fullName: answers[1] || '',
+            email: answers[2] || '',
+            country: answers[3] || '',
+            preferredLanguage: answers[4] || 'English',
+            howHeard: answers[5] || '',
+            userType: userType || '',
+            ageGroup: answers[7] || '',
+            answers: answers
+        };
+
+        console.log('Submitting questionnaire:', submissionData);
+
+        // Send to backend
+        const response = await fetch('http://localhost:3000/api/submit-questionnaire', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(submissionData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            console.log('✅ Questionnaire submitted successfully:', result);
+            // Show success message
+            document.getElementById('questionnaire').classList.remove('active');
+            document.getElementById('thank-you').classList.add('active');
+            window.scrollTo(0, 0);
+        } else {
+            console.error('❌ Error submitting questionnaire:', result.message);
+            // Still show thank you page even if backend fails
+            document.getElementById('questionnaire').classList.remove('active');
+            document.getElementById('thank-you').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    } catch (error) {
+        console.error('❌ Network error:', error);
+        // Still show thank you page even if network fails
+        document.getElementById('questionnaire').classList.remove('active');
+        document.getElementById('thank-you').classList.add('active');
+        window.scrollTo(0, 0);
+    }
 }
 
 // Keyboard navigation
