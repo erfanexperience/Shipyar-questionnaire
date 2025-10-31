@@ -1259,7 +1259,7 @@ async function submitQuestionnaire() {
         const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         const apiUrl = isLocalhost 
             ? 'http://localhost:3000/api/submit-questionnaire'
-            : 'https://your-backend-domain.com/api/submit-questionnaire'; // UPDATE THIS with your backend URL
+            : 'https://shipyar-questionnaire.onrender.com/api/submit-questionnaire';
 
         // Send to backend
         const response = await fetch(apiUrl, {
