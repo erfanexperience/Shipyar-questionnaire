@@ -7,7 +7,7 @@ module.exports = {
     password: '123321'
   },
   googleSheets: {
-    sheetId: 'your_google_sheet_id_here' // You'll need to replace this
+    sheetId: '1eJfC9pIEubbjmCn1gsT_E2unbLG6vKjp0-PkqU4FVDA' // You'll need to replace this
   },
   server: {
     port: 3000

@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 const { google } = require('googleapis');
+const config = require('./config');
 require('dotenv').config();
 
 const app = express();
@@ -137,7 +138,7 @@ app.post('/api/submit-questionnaire', async (req, res) => {
 // Function to add data to Google Sheets
 const addToGoogleSheets = async (data) => {
   try {
-    const spreadsheetId = process.env.GOOGLE_SHEET_ID; // You'll need to set this
+    const spreadsheetId = config.googleSheets.sheetId; // Use config file
     const range = 'Sheet1!A:K'; // Adjust range as needed
 
     const values = [

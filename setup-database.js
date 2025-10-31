@@ -1,12 +1,19 @@
 const { Pool } = require('pg');
 const config = require('./config');
 
-const pool = new Pool(config.database);
+// First connect to default postgres database to create our database
+const defaultPool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'postgres', // Connect to default database
+  password: '123321',
+  port: 5432,
+});
 
 async function setupDatabase() {
   try {
-    // Connect to PostgreSQL
-    const client = await pool.connect();
+    // Connect to default postgres database
+    const client = await defaultPool.connect();
     console.log('✅ Connected to PostgreSQL');
 
     // Create database if it doesn't exist
@@ -22,7 +29,11 @@ async function setupDatabase() {
     }
   }
 
-  // Create table
+  await defaultPool.end();
+
+  // Now connect to our specific database to create table
+  const pool = new Pool(config.database);
+  
   try {
     const client = await pool.connect();
     

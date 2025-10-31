@@ -1274,8 +1274,14 @@ async function submitQuestionnaire() {
 
         console.log('Submitting questionnaire:', submissionData);
 
+        // Determine API URL (use production URL when not on localhost)
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const apiUrl = isLocalhost 
+            ? 'http://localhost:3000/api/submit-questionnaire'
+            : 'https://your-backend-domain.com/api/submit-questionnaire'; // UPDATE THIS with your backend URL
+
         // Send to backend
-        const response = await fetch('http://localhost:3000/api/submit-questionnaire', {
+        const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
