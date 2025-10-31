@@ -14,20 +14,32 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// PostgreSQL connection
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'shippyar_questionnaire',
-  password: '123321',
-  port: 5432,
-});
+// PostgreSQL connection - uses environment variables if available (Render), otherwise local config
+const pool = new Pool(
+  process.env.DATABASE_URL
+    ? {
+        connectionString: process.env.DATABASE_URL,
+        ssl: process.env.DATABASE_URL.includes('render.com') ? { rejectUnauthorized: false } : false
+      }
+    : {
+        user: process.env.PGUSER || 'postgres',
+        host: process.env.PGHOST || 'localhost',
+        database: process.env.PGDATABASE || 'shippyar_questionnaire',
+        password: process.env.PGPASSWORD || '123321',
+        port: process.env.PGPORT || 5432,
+      }
+);
 
-// Google Sheets setup
-const auth = new google.auth.GoogleAuth({
-  keyFile: 'credentials.json', // You'll need to create this
-  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-});
+// Google Sheets setup - uses environment variable if available (Render), otherwise file
+const auth = process.env.GOOGLE_CREDENTIALS
+  ? new google.auth.GoogleAuth({
+      credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    })
+  : new google.auth.GoogleAuth({
+      keyFile: 'credentials.json',
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    });
 
 const sheets = google.sheets({ version: 'v4', auth });
 
@@ -138,7 +150,7 @@ app.post('/api/submit-questionnaire', async (req, res) => {
 // Function to add data to Google Sheets
 const addToGoogleSheets = async (data) => {
   try {
-    const spreadsheetId = config.googleSheets.sheetId; // Use config file
+    const spreadsheetId = process.env.GOOGLE_SHEET_ID || config.googleSheets.sheetId;
     const range = 'Sheet1!A:K'; // Adjust range as needed
 
     const values = [

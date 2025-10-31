@@ -1,41 +1,26 @@
 const { Pool } = require('pg');
-const config = require('./config');
 
-// First connect to default postgres database to create our database
-const defaultPool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'postgres', // Connect to default database
-  password: '123321',
-  port: 5432,
-});
+// Use Render database URL if available, otherwise use local config
+const databaseUrl = process.env.DATABASE_URL;
 
 async function setupDatabase() {
-  try {
-    // Connect to default postgres database
-    const client = await defaultPool.connect();
-    console.log('✅ Connected to PostgreSQL');
-
-    // Create database if it doesn't exist
-    await client.query('CREATE DATABASE shippyar_questionnaire');
-    console.log('✅ Database created');
-    
-    client.release();
-  } catch (error) {
-    if (error.code === '42P04') {
-      console.log('✅ Database already exists');
-    } else {
-      console.error('Error creating database:', error);
-    }
+  let pool;
+  
+  if (databaseUrl) {
+    // Render database - database already exists, just create table
+    pool = new Pool({
+      connectionString: databaseUrl,
+      ssl: databaseUrl.includes('render.com') ? { rejectUnauthorized: false } : false
+    });
+  } else {
+    // Local database setup
+    const config = require('./config');
+    pool = new Pool(config.database);
   }
 
-  await defaultPool.end();
-
-  // Now connect to our specific database to create table
-  const pool = new Pool(config.database);
-  
   try {
     const client = await pool.connect();
+    console.log('✅ Connected to PostgreSQL');
     
     const createTableQuery = `
       CREATE TABLE IF NOT EXISTS questionnaire_responses (
