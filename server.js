@@ -169,6 +169,11 @@ app.post('/api/submit-questionnaire', async (req, res) => {
 
 // Function to add data to Google Sheets
 const addToGoogleSheets = async (data) => {
+  if (!sheets) {
+    console.log('⚠️ Google Sheets integration not available, skipping...');
+    return;
+  }
+  
   try {
     const spreadsheetId = process.env.GOOGLE_SHEET_ID || config.googleSheets.sheetId;
     const range = 'Sheet1!A:K'; // Adjust range as needed
