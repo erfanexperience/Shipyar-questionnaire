@@ -31,17 +31,37 @@ const pool = new Pool(
 );
 
 // Google Sheets setup - uses environment variable if available (Render), otherwise file
-const auth = process.env.GOOGLE_CREDENTIALS
-  ? new google.auth.GoogleAuth({
-      credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
+let auth;
+try {
+  if (process.env.GOOGLE_CREDENTIALS) {
+    // Try to parse the credentials - handle if it's a string or already JSON
+    let credentials = process.env.GOOGLE_CREDENTIALS;
+    // Remove surrounding quotes if present
+    if (credentials.startsWith('"') && credentials.endsWith('"')) {
+      credentials = credentials.slice(1, -1);
+    }
+    // Parse the JSON
+    const parsedCredentials = JSON.parse(credentials);
+    auth = new google.auth.GoogleAuth({
+      credentials: parsedCredentials,
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-    })
-  : new google.auth.GoogleAuth({
+    });
+    console.log('✅ Google Sheets auth configured from environment variable');
+  } else {
+    auth = new google.auth.GoogleAuth({
       keyFile: 'credentials.json',
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     });
+    console.log('✅ Google Sheets auth configured from credentials.json file');
+  }
+} catch (error) {
+  console.error('❌ Error setting up Google Sheets authentication:', error.message);
+  console.log('⚠️ Continuing without Google Sheets integration...');
+  // Create a dummy auth object to prevent crashes
+  auth = null;
+}
 
-const sheets = google.sheets({ version: 'v4', auth });
+const sheets = auth ? google.sheets({ version: 'v4', auth }) : null;
 
 // Test database connection
 pool.connect((err, client, release) => {
