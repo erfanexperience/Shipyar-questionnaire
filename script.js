@@ -32,10 +32,10 @@ const translations = {
         q1_title: "What's your full name?",
         q1_placeholder: "Enter your full name",
         q2_title: "What's your email address?",
-        q2_description: "📧 We'll use this for early access & giveaway confirmation",
+        q2_description: "We'll use this for early access confirmation",
         q2_placeholder: "Enter your email address",
         q3_title: "Where do you live?",
-        q3_description: "🌍 Help us connect you with local travelers",
+        q3_description: "Help us connect you with local travelers",
         q3_placeholder: "Start typing your country or city...",
         q4_title: "What's your preferred language?",
         q5_title: "How did you hear about Shippyar?",
@@ -43,14 +43,14 @@ const translations = {
         q5_opt2: "Friend or referral",
         q5_opt3: "Online ad or blog",
         q5_opt4: "Other",
-        q6_title: "🎯 Which best describes you?",
+        q6_title: "Which best describes you?",
         q6_description: "This helps us show you the most relevant questions!",
-        q6_opt1: "✈️ Frequent international traveler",
-        q6_opt2: "📦 Online store owner / e-commerce seller",
-        q6_opt3: "🛍️ Buyer / recipient of items from other countries",
+        q6_opt1: "International traveler",
+        q6_opt2: "Online Store Owner / E-commerce Seller",
+        q6_opt3: "Buyer / Recipient",
         q7_title: "What's your age group?",
         
-        // Traveler questions (8 questions)
+        // Traveler path (8 questions)
         q8_title: "How often do you travel internationally?",
         q8_opt1: "Once or twice a year",
         q8_opt2: "Every few months",
@@ -67,33 +67,32 @@ const translations = {
         q10_opt2: "Sometimes have space",
         q10_opt3: "Usually full",
         q10_opt4: "Depends on the trip",
-        q11_title: "In Shippyar, travelers deliver items that they directly purchase from the buyer's listed order, then hand-deliver them safely to verified users. Would you be open to doing this during your travels?",
-        q11_opt1: "Yes, sounds great!",
-        q11_opt2: "Maybe, if it's verified and secure",
-        q11_opt3: "Not sure yet",
+        q11_title: "Would you be open to purchasing and delivering verified buyers' items during your trips?",
+        q11_opt1: "Yes, I'm open to it",
+        q11_opt2: "Maybe, depends on the item",
+        q11_opt3: "Not right now",
         q12_title: "What would make you feel comfortable doing that?",
         q12_opt1: "Verified buyers & ID check",
         q12_opt2: "Insurance / protection by Shippyar",
         q12_opt3: "Secure payments",
         q12_opt4: "Reviews & community ratings",
-        q13_title: "What would make you feel comfortable doing that?",
-        q13_opt1: "Verified buyers & ID check",
-        q13_opt2: "Insurance / protection by Shippyar",
-        q13_opt3: "Secure payments",
-        q13_opt4: "Reviews & community ratings",
-        q13_opt5: "All of the above",
-        q14_title: "How much would you charge per kg?",
-        q14_opt1: "$5-10",
-        q14_opt2: "$10-15",
-        q14_opt3: "$15-20",
-        q14_opt4: "Depends on destination",
-        q15_title: "What motivates you to join as a traveler?",
-        q15_opt1: "Earn extra money",
-        q15_opt2: "Help others get what they need",
-        q15_opt3: "Reduce my travel costs",
-        q15_opt4: "Try something new",
+        q12_opt5: "All of the above",
+        q13_title: "How much would you charge per kg?",
+        q13_opt1: "$5-10",
+        q13_opt2: "$10-15",
+        q13_opt3: "$15-20",
+        q13_opt4: "Depends on destination",
+        q14_title: "What motivates you to join as a traveler?",
+        q14_opt1: "Earn extra money",
+        q14_opt2: "Help others get what they need",
+        q14_opt3: "Reduce my travel costs",
+        q14_opt4: "Try something new",
+        q15_title: "How likely are you to try Shippyar when it launches?",
+        q15_opt1: "Very likely",
+        q15_opt2: "Maybe",
+        q15_opt3: "Not sure",
         
-        // Seller questions (5 questions)
+        // Seller path (7 questions)
         q16_title: "How often do you ship internationally?",
         q16_opt1: "Daily",
         q16_opt2: "Weekly",
@@ -110,63 +109,60 @@ const translations = {
         q18_opt2: "Delays or customs issues",
         q18_opt3: "Package loss/damage",
         q18_opt4: "Unreliable couriers",
-        q19_title: "Would you be interested in a partnership or pilot with Shippyar?",
-        q19_opt1: "Yes",
-        q19_opt2: "Maybe later",
-        q19_opt3: "Not now",
-        q20_title: "How likely are you to try Shippyar when it launches?",
-        q20_opt1: "Very likely",
-        q20_opt2: "Maybe",
-        q20_opt3: "Not sure",
+        q19_title: "What's the usual value range of your international orders?",
+        q19_opt1: "Under $50",
+        q19_opt2: "$50 – $150",
+        q19_opt3: "$150 – $500",
+        q19_opt4: "Over $500",
+        q20_title: "What types of items do you usually ship?",
+        q20_opt1: "Fashion / Accessories",
+        q20_opt2: "Electronics / Gadgets",
+        q20_opt3: "Beauty / Personal care",
+        q20_opt4: "Collectibles / Custom items",
+        q20_opt5: "Other",
+        q21_title: "Would you be interested in a partnership or pilot with Shippyar?",
+        q21_opt1: "Yes",
+        q21_opt2: "Maybe later",
+        q21_opt3: "Not now",
+        q22_title: "How likely are you to try Shippyar when it launches?",
+        q22_opt1: "Very likely",
+        q22_opt2: "Maybe",
+        q22_opt3: "Not sure",
         
-        // Buyer/Recipient questions (6 questions)
-        q21_title: "How often do you buy products from abroad?",
-        q21_opt1: "Rarely",
-        q21_opt2: "Sometimes (every few months)",
-        q21_opt3: "Often (monthly or more)",
-        q22_title: "What kind of products do you usually buy?",
-        q22_opt1: "Fashion & accessories",
-        q22_opt2: "Tech gadgets",
-        q22_opt3: "Beauty & wellness",
-        q22_opt4: "Collectibles",
-        q22_opt5: "Other",
-        q23_title: "What's your biggest issue with current shipping options?",
-        q23_opt1: "Too expensive",
-        q23_opt2: "Takes too long",
-        q23_opt3: "Customs problems",
-        q23_opt4: "No tracking / trust issues",
-        q24_title: "Would you trust verified travelers to bring your items safely?",
-        q24_opt1: "Yes, if they're verified",
-        q24_opt2: "Maybe, if I can see reviews",
-        q24_opt3: "Not sure yet",
-        q25_title: "What would make you most likely to use Shippyar?",
-        q25_opt1: "Lower cost",
-        q25_opt2: "Faster delivery",
-        q25_opt3: "Verified & insured system",
-        q25_opt4: "All of the above",
-        q26_title: "How likely are you to try Shippyar when it launches?",
-        q26_opt1: "Very likely",
-        q26_opt2: "Maybe",
-        q26_opt3: "Not sure",
-        
-        // Final questions (shown to everyone)
-        q27_title: "🎁 You're automatically entered into a draw for 10 Amazon $25 gift cards!",
-        q27_opt1: "Great!",
-        q27_opt2: "Awesome!",
-        q27_opt3: "Exciting!",
-        q27_opt4: "Perfect!",
-        q28_title: "💳 All early access members also get exclusive launch credits to use on their first delivery.",
-        q28_opt1: "Thank you!",
-        q28_opt2: "Amazing!",
-        q28_opt3: "Can't wait!",
-        q28_opt4: "Perfect!",
-        q29_title: "To complete your early access registration, please follow Shippyar on at least one platform below:",
-        q29_opt1: "Follow on Instagram",
-        q29_opt2: "Follow on LinkedIn",
-        q29_opt3: "Follow on TikTok",
-        q29_opt4: "Join Telegram Channel (optional)",
-        q30_title: "✅ You're all set! Thanks for joining the Shippyar Early Access Program.",
-        q30_opt1: "You're welcome!",
+        // Buyer/Recipient path (7 questions)
+        q23_title: "How often do you buy products from abroad?",
+        q23_opt1: "Rarely",
+        q23_opt2: "Sometimes (every few months)",
+        q23_opt3: "Often (monthly or more)",
+        q24_title: "What kind of products do you usually buy?",
+        q24_opt1: "Fashion & accessories",
+        q24_opt2: "Tech gadgets",
+        q24_opt3: "Beauty & wellness",
+        q24_opt4: "Collectibles",
+        q24_opt5: "Other",
+        q25_title: "What's the typical value range of items you order from abroad?",
+        q25_opt1: "Under $50",
+        q25_opt2: "$50 – $150",
+        q25_opt3: "$150 – $500",
+        q25_opt4: "Over $500",
+        q26_title: "What's your biggest issue with current shipping options?",
+        q26_opt1: "Too expensive",
+        q26_opt2: "Takes too long",
+        q26_opt3: "Customs problems",
+        q26_opt4: "No tracking / trust issues",
+        q27_title: "Would you trust verified travelers to bring your items safely?",
+        q27_opt1: "Yes, if they're verified",
+        q27_opt2: "Maybe, if I can see reviews",
+        q27_opt3: "Not sure yet",
+        q28_title: "What would make you most likely to use Shippyar?",
+        q28_opt1: "Lower cost",
+        q28_opt2: "Faster delivery",
+        q28_opt3: "Verified & insured system",
+        q28_opt4: "All of the above",
+        q29_title: "How likely are you to try Shippyar when it launches?",
+        q29_opt1: "Very likely",
+        q29_opt2: "Maybe",
+        q29_opt3: "Not sure",
         
         // Common
         item_opt1: "Fashion & accessories",
@@ -889,35 +885,32 @@ const questionStructure = [
     { id: 7, type: "agegroup", key: "q7" },
     
     // Traveler path (8-15) - 8 questions
-    { id: 8, type: "radio", key: "q8", showIf: ["✈️ Frequent international traveler"], options: 4 },
-    { id: 9, type: "radio", key: "q9", showIf: ["✈️ Frequent international traveler"], options: 5 },
-    { id: 10, type: "radio", key: "q10", showIf: ["✈️ Frequent international traveler"], options: 4 },
-    { id: 11, type: "radio", key: "q11", showIf: ["✈️ Frequent international traveler"], options: 3 },
-    { id: 12, type: "radio", key: "q12", showIf: ["✈️ Frequent international traveler"], options: 4 },
-    { id: 13, type: "radio", key: "q13", showIf: ["✈️ Frequent international traveler"], options: 5 },
-    { id: 14, type: "radio", key: "q14", showIf: ["✈️ Frequent international traveler"], options: 4 },
-    { id: 15, type: "radio", key: "q15", showIf: ["✈️ Frequent international traveler"], options: 4 },
+    { id: 8, type: "radio", key: "q8", showIf: ["International traveler"], options: 4 },
+    { id: 9, type: "radio", key: "q9", showIf: ["International traveler"], options: 5 },
+    { id: 10, type: "radio", key: "q10", showIf: ["International traveler"], options: 4 },
+    { id: 11, type: "radio", key: "q11", showIf: ["International traveler"], options: 3 },
+    { id: 12, type: "checkbox", key: "q12", showIf: ["International traveler"], options: 5, maxSelections: 5 },
+    { id: 13, type: "radio", key: "q13", showIf: ["International traveler"], options: 4 },
+    { id: 14, type: "radio", key: "q14", showIf: ["International traveler"], options: 4 },
+    { id: 15, type: "radio", key: "q15", showIf: ["International traveler"], options: 3 },
     
-    // Seller path (16-20) - 5 questions
-    { id: 16, type: "radio", key: "q16", showIf: ["📦 Online store owner / e-commerce seller"], options: 4 },
-    { id: 17, type: "checkbox", key: "q17", showIf: ["📦 Online store owner / e-commerce seller"], maxSelections: 5, options: 5 },
-    { id: 18, type: "radio", key: "q18", showIf: ["📦 Online store owner / e-commerce seller"], options: 4 },
-    { id: 19, type: "radio", key: "q19", showIf: ["📦 Online store owner / e-commerce seller"], options: 3 },
-    { id: 20, type: "radio", key: "q20", showIf: ["📦 Online store owner / e-commerce seller"], options: 3 },
+    // Seller path (16-22) - 7 questions
+    { id: 16, type: "radio", key: "q16", showIf: ["Online Store Owner / E-commerce Seller"], options: 4 },
+    { id: 17, type: "radio", key: "q17", showIf: ["Online Store Owner / E-commerce Seller"], options: 5 },
+    { id: 18, type: "radio", key: "q18", showIf: ["Online Store Owner / E-commerce Seller"], options: 4 },
+    { id: 19, type: "radio", key: "q19", showIf: ["Online Store Owner / E-commerce Seller"], options: 4 },
+    { id: 20, type: "checkbox", key: "q20", showIf: ["Online Store Owner / E-commerce Seller"], options: 5, maxSelections: 5 },
+    { id: 21, type: "radio", key: "q21", showIf: ["Online Store Owner / E-commerce Seller"], options: 3 },
+    { id: 22, type: "radio", key: "q22", showIf: ["Online Store Owner / E-commerce Seller"], options: 3 },
     
-    // Buyer/Recipient path (21-26) - 6 questions
-    { id: 21, type: "radio", key: "q21", showIf: ["🛍️ Buyer / recipient of items from other countries"], options: 3 },
-    { id: 22, type: "checkbox", key: "q22", showIf: ["🛍️ Buyer / recipient of items from other countries"], maxSelections: 5, options: 5 },
-    { id: 23, type: "radio", key: "q23", showIf: ["🛍️ Buyer / recipient of items from other countries"], options: 4 },
-    { id: 24, type: "radio", key: "q24", showIf: ["🛍️ Buyer / recipient of items from other countries"], options: 3 },
-    { id: 25, type: "radio", key: "q25", showIf: ["🛍️ Buyer / recipient of items from other countries"], options: 4 },
-    { id: 26, type: "radio", key: "q26", showIf: ["🛍️ Buyer / recipient of items from other countries"], options: 3 },
-    
-    // Final questions (27-30) - shown to everyone
-    { id: 27, type: "radio", key: "q27", options: 4 },
-    { id: 28, type: "radio", key: "q28", options: 4 },
-    { id: 29, type: "checkbox", key: "q29", required: false, options: 4 },
-    { id: 30, type: "radio", key: "q30", options: 1 }
+    // Buyer/Recipient path (23-29) - 7 questions
+    { id: 23, type: "radio", key: "q23", showIf: ["Buyer / Recipient"], options: 3 },
+    { id: 24, type: "checkbox", key: "q24", showIf: ["Buyer / Recipient"], options: 5, maxSelections: 5 },
+    { id: 25, type: "radio", key: "q25", showIf: ["Buyer / Recipient"], options: 4 },
+    { id: 26, type: "radio", key: "q26", showIf: ["Buyer / Recipient"], options: 4 },
+    { id: 27, type: "radio", key: "q27", showIf: ["Buyer / Recipient"], options: 3 },
+    { id: 28, type: "checkbox", key: "q28", showIf: ["Buyer / Recipient"], options: 4, maxSelections: 4 },
+    { id: 29, type: "radio", key: "q29", showIf: ["Buyer / Recipient"], options: 3 }
 ];
 
 // Global variables
@@ -931,7 +924,6 @@ let selectedLanguage = "English";
 document.addEventListener('DOMContentLoaded', function() {
     filteredQuestions = questionStructure.filter(q => q.id <= 7);
     updateProgressBar();
-    updateQuestionCounter();
 });
 
 // Start questionnaire
@@ -953,17 +945,12 @@ function filterQuestions() {
             return question.showIf.includes(userType);
         }
         
-        // Show final questions (27-30) to everyone
-        if (question.id >= 27) return true;
-        
         return false;
     });
-    
-    updateQuestionCounter();
 }
 
 function getUserTypeIndex() {
-    const types = ["✈️ Frequent international traveler", "📦 Online store owner / e-commerce seller", "🛍️ Buyer / recipient of items from other countries"];
+    const types = ["International traveler", "Online Store Owner / E-commerce Seller", "Buyer / Recipient"];
     return types.indexOf(userType) + 1;
 }
 
@@ -975,7 +962,6 @@ function showQuestion(index) {
     const question = filteredQuestions[index];
     
     updateProgressBar();
-    updateQuestionCounter();
     renderQuestion(question);
     updateNavigationButtons();
 }
@@ -1071,7 +1057,7 @@ function renderQuestion(question) {
     } else if (question.type === 'checkbox') {
         html += '<div class="question-options">';
         for (let i = 1; i <= question.options; i++) {
-            const optionKey = question.key.includes('item') || question.key === 'q17' || question.key === 'q22' ? `item_opt${i}` : `${question.key}_opt${i}`;
+            const optionKey = question.key.includes('item') || question.key === 'q17' || question.key === 'q20' || question.key === 'q22' || question.key === 'q24' ? `item_opt${i}` : `${question.key}_opt${i}`;
             if (trans[optionKey]) {
                 const optionText = trans[optionKey];
                 const isSelected = answers[question.id] && answers[question.id].includes(optionText);
@@ -1235,12 +1221,7 @@ function isValidEmail(email) {
 function updateProgressBar() {
     const progress = ((currentQuestionIndex + 1) / filteredQuestions.length) * 100;
     document.getElementById('progress-fill').style.width = progress + '%';
-}
-
-// Update question counter
-function updateQuestionCounter() {
-    document.getElementById('current-question').textContent = currentQuestionIndex + 1;
-    document.getElementById('total-questions').textContent = filteredQuestions.length;
+    document.getElementById('progress-percentage').textContent = Math.round(progress) + '%';
 }
 
 // Update navigation buttons
@@ -1251,7 +1232,7 @@ function updateNavigationButtons() {
     prevButton.disabled = currentQuestionIndex === 0;
     
     if (currentQuestionIndex === filteredQuestions.length - 1) {
-        nextButton.innerHTML = '🎉 Submit & Win! <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>';
+        nextButton.innerHTML = 'Submit <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>';
     } else {
         nextButton.innerHTML = 'Next <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
     }
@@ -1326,44 +1307,3 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Copy discount code function
-function copyCode() {
-    const code = 'QUEST';
-    navigator.clipboard.writeText(code).then(function() {
-        // Show success feedback
-        const button = document.querySelector('.copy-button');
-        const originalText = button.innerHTML;
-        button.innerHTML = '✅ Copied!';
-        button.style.background = 'rgba(34, 197, 94, 0.3)';
-        button.style.borderColor = 'rgba(34, 197, 94, 0.5)';
-        
-        // Reset after 2 seconds
-        setTimeout(() => {
-            button.innerHTML = originalText;
-            button.style.background = 'rgba(255,255,255,0.2)';
-            button.style.borderColor = 'rgba(255,255,255,0.3)';
-        }, 2000);
-    }).catch(function(err) {
-        // Fallback for older browsers
-        const textArea = document.createElement('textarea');
-        textArea.value = code;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        
-        // Show success feedback
-        const button = document.querySelector('.copy-button');
-        const originalText = button.innerHTML;
-        button.innerHTML = '✅ Copied!';
-        button.style.background = 'rgba(34, 197, 94, 0.3)';
-        button.style.borderColor = 'rgba(34, 197, 94, 0.5)';
-        
-        // Reset after 2 seconds
-        setTimeout(() => {
-            button.innerHTML = originalText;
-            button.style.background = 'rgba(255,255,255,0.2)';
-            button.style.borderColor = 'rgba(255,255,255,0.3)';
-        }, 2000);
-    });
-}

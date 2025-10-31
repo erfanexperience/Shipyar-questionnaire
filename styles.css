@@ -230,29 +230,59 @@ body::before {
     justify-content: center;
 }
 
+.progress-bar-container {
+    margin-bottom: 40px;
+    width: 100%;
+}
+
 .progress-bar {
     width: 100%;
-    height: 8px;
-    background: rgba(62, 149, 208, 0.2);
-    border-radius: 4px;
-    margin-bottom: 30px;
+    height: 12px;
+    background: rgba(255, 165, 0, 0.15);
+    border-radius: 10px;
     overflow: hidden;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(255, 165, 0, 0.2);
 }
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(135deg, #3E95D0, #5BA3D9);
-    border-radius: 4px;
-    transition: width 0.3s ease;
+    background: linear-gradient(90deg, #FF8C00, #FFA500, #FFB347);
+    border-radius: 10px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     width: 0%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
 }
 
-.question-counter {
+.progress-fill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.progress-percentage {
     text-align: center;
-    font-size: 1rem;
-    color: #2B7BB8;
-    margin-bottom: 40px;
-    font-weight: 500;
+    font-size: 1.1rem;
+    color: #FF8C00;
+    margin-top: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .question-content {
@@ -430,34 +460,61 @@ body::before {
 
 /* Thank You Page */
 .thank-you-container {
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 30px 20px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
 }
 
-.success-icon {
-    color: #3E95D0;
+.social-icons-top {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
     margin-bottom: 30px;
+    width: 100%;
+    padding-top: 20px;
 }
 
-.thank-you-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #2d3748;
+.social-icon-link {
+    color: #3E95D0;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icon-link:hover {
+    color: #FF8C00;
+    transform: translateY(-3px);
+}
+
+.social-icon-link svg {
+    width: 28px;
+    height: 28px;
+}
+
+.success-icon {
+    color: #3E95D0;
     margin-bottom: 20px;
 }
 
+.thank-you-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 15px;
+}
+
 .thank-you-message {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #4a5568;
-    margin-bottom: 16px;
-    line-height: 1.6;
+    margin-bottom: 25px;
+    line-height: 1.5;
 }
 
 .thank-you-date {
@@ -478,10 +535,11 @@ body::before {
     background: linear-gradient(135deg, rgba(62, 149, 208, 0.1) 0%, rgba(91, 163, 217, 0.05) 100%);
     border: 2px solid rgba(62, 149, 208, 0.2);
     border-radius: 20px;
-    padding: 30px;
-    margin: 30px 0;
+    padding: 25px;
+    margin: 20px 0;
     position: relative;
     overflow: hidden;
+    width: 100%;
 }
 
 .discount-code-section::before {
@@ -502,16 +560,16 @@ body::before {
 }
 
 .discount-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 600;
     color: #2d3748;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .discount-message {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: #4a5568;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     line-height: 1.5;
 }
 
@@ -519,19 +577,17 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+    margin-bottom: 15px;
 }
 
 .discount-code {
     background: linear-gradient(135deg, #3e95d0 0%, #5ba3d9 100%);
     color: white;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     font-family: 'Courier New', monospace;
     letter-spacing: 3px;
-    padding: 15px 25px;
+    padding: 12px 20px;
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(62, 149, 208, 0.3);
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -582,10 +638,11 @@ body::before {
 }
 
 .discount-info {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: #2d3748;
     font-weight: 500;
     line-height: 1.5;
+    margin: 0;
 }
 
 .social-links {
