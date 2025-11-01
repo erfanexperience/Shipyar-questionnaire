@@ -312,6 +312,10 @@ const translations = {
         q29_opt2: "Belki",
         q29_opt3: "Emin değilim",
         
+        submit_button: "Gönder",
+        next_button: "Sonraki",
+        previous_button: "Önceki",
+        
         item_opt1: "Kişisel eşyalar / hediyeler",
         item_opt2: "Giyim / aksesuarlar",
         item_opt3: "Elektronik",
@@ -323,7 +327,11 @@ const translations = {
         value_opt1: "50$'ın altında",
         value_opt2: "50-200$",
         value_opt3: "200-500$",
-        value_opt4: "500$+"
+        value_opt4: "500$+",
+        
+        submit_button: "Submit",
+        next_button: "Next",
+        previous_button: "Previous"
     },
     Arabic: {
         q1_title: "ما هو اسمك الكامل؟",
@@ -472,7 +480,11 @@ const translations = {
         value_opt1: "أقل من 50 دولار",
         value_opt2: "50-200 دولار",
         value_opt3: "200-500 دولار",
-        value_opt4: "500 دولار+"
+        value_opt4: "500 دولار+",
+        
+        submit_button: "إرسال",
+        next_button: "التالي",
+        previous_button: "السابق"
     },
     Spanish: {
         q1_title: "¿Cuál es tu nombre completo?",
@@ -609,6 +621,10 @@ const translations = {
         q29_opt1: "Muy probable",
         q29_opt2: "Tal vez",
         q29_opt3: "No estoy seguro",
+        
+        submit_button: "Enviar",
+        next_button: "Siguiente",
+        previous_button: "Anterior",
         
         item_opt1: "Artículos personales / regalos",
         item_opt2: "Ropa / accesorios",
@@ -758,6 +774,10 @@ const translations = {
         q29_opt1: "Très probable",
         q29_opt2: "Peut-être",
         q29_opt3: "Pas sûr",
+        
+        submit_button: "Soumettre",
+        next_button: "Suivant",
+        previous_button: "Précédent",
         
         item_opt1: "Articles personnels / cadeaux",
         item_opt2: "Vêtements / accessoires",
@@ -997,6 +1017,7 @@ function selectLanguage(questionId, language) {
     // If "Other" is selected, use English for the questionnaire
     selectedLanguage = (language === "Other") ? "English" : language;
     renderQuestion(filteredQuestions[currentQuestionIndex]);
+    updateNavigationButtons();
 }
 
 // Select user type
@@ -1149,16 +1170,38 @@ function updateNavigationButtons() {
     
     prevButton.disabled = currentQuestionIndex === 0;
     
+    const trans = translations[selectedLanguage];
+    
     if (currentQuestionIndex === filteredQuestions.length - 1) {
-        nextButton.innerHTML = 'Submit <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>';
+        // Submit button
+        const submitText = trans.submit_button || "Submit";
+        nextButton.innerHTML = `${submitText} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>`;
+        nextButton.onclick = () => {
+            if (validateCurrentQuestion()) {
+                submitQuestionnaire();
+            }
+        };
     } else {
-        nextButton.innerHTML = 'Next <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        // Next button
+        const nextText = trans.next_button || "Next";
+        nextButton.innerHTML = `${nextText} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+        nextButton.onclick = () => nextQuestion();
     }
 }
 
 // Submit questionnaire
 async function submitQuestionnaire() {
     try {
+        // Map normalized userType back to full text for submission
+        const userTypeMap = {
+            "traveler": "International traveler",
+            "seller": "Online Store Owner / E-commerce Seller",
+            "buyer": "Buyer / Recipient"
+        };
+        
+        // Use the translated answer or map the normalized key
+        const submittedUserType = answers[6] || userTypeMap[userType] || userType || '';
+        
         // Prepare data for submission
         const submissionData = {
             fullName: answers[1] || '',
@@ -1166,7 +1209,7 @@ async function submitQuestionnaire() {
             country: answers[3] || '',
             preferredLanguage: answers[4] || 'English',
             howHeard: answers[5] || '',
-            userType: userType || '',
+            userType: submittedUserType,
             ageGroup: answers[7] || '',
             answers: answers
         };
