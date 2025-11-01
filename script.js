@@ -836,13 +836,22 @@ function startQuestionnaire() {
 
 // Filter questions based on user type
 function filterQuestions() {
+    // Map user type keys to showIf values
+    const userTypeMap = {
+        "traveler": "International traveler",
+        "seller": "Online Store Owner / E-commerce Seller",
+        "buyer": "Buyer / Recipient"
+    };
+    
+    const mappedUserType = userTypeMap[userType] || userType;
+    
     filteredQuestions = questionStructure.filter(question => {
         // Always show basic questions (1-7)
         if (question.id <= 7) return true;
         
         // Show questions based on user type
-        if (question.showIf && userType) {
-            return question.showIf.includes(userType);
+        if (question.showIf && mappedUserType) {
+            return question.showIf.includes(mappedUserType);
         }
         
         return false;
@@ -914,11 +923,13 @@ function renderQuestion(question) {
         html += '</div>';
     } else if (question.type === 'usertype') {
         html += '<div class="question-options">';
+        const userTypeKeys = ["traveler", "seller", "buyer"];
         for (let i = 1; i <= 3; i++) {
             const optionText = trans[`${question.key}_opt${i}`];
-            const isSelected = answers[question.id] === optionText;
+            const userTypeKey = userTypeKeys[i - 1];
+            const isSelected = userType === userTypeKey || answers[question.id] === optionText;
             html += `
-                <div class="option ${isSelected ? 'selected' : ''}" onclick="selectUserType(${question.id}, '${optionText}')">
+                <div class="option ${isSelected ? 'selected' : ''}" onclick="selectUserType(${question.id}, '${userTypeKey}', '${optionText.replace(/'/g, "\\'")}')">
                     <input type="radio" name="question_${question.id}" value="${optionText}" ${isSelected ? 'checked' : ''}>
                     <label>${optionText}</label>
                 </div>
@@ -989,11 +1000,18 @@ function selectLanguage(questionId, language) {
 }
 
 // Select user type
-function selectUserType(questionId, value) {
-    answers[questionId] = value;
-    userType = value;
+function selectUserType(questionId, userTypeKey, translatedText) {
+    answers[questionId] = translatedText;
+    // Store normalized key for filtering
+    userType = userTypeKey;
     filterQuestions();
-    renderQuestion(filteredQuestions[currentQuestionIndex]);
+    // Move to next question if available
+    if (currentQuestionIndex < filteredQuestions.length - 1) {
+        currentQuestionIndex++;
+        showQuestion(currentQuestionIndex);
+    } else {
+        renderQuestion(filteredQuestions[currentQuestionIndex]);
+    }
 }
 
 // Select radio option
