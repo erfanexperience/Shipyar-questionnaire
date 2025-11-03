@@ -1161,6 +1161,8 @@ body::before {
     
     .question-content {
         padding: 30px 20px;
+        width: 95%;
+        max-width: 95%;
     }
     
     .question-title {
