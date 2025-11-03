@@ -303,6 +303,8 @@ body::before {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     margin-bottom: 40px;
     min-height: 300px;
+    width: 100%;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -471,8 +473,8 @@ body::before {
 
 /* Thank You Page */
 .thank-you-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
     padding: 30px 20px;
     min-height: 100vh;
     display: flex;
