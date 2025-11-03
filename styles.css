@@ -468,27 +468,38 @@ body::before {
 }
 
 /* Thank You Page */
-.thank-you-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.thank-you-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
     align-items: center;
-    text-align: center;
-    overflow-y: auto;
+    min-height: calc(100vh - 100px);
+    padding: 60px 0;
     position: relative;
 }
 
-.thank-you-content {
-    width: 100%;
+.thank-you-left {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 500px;
+}
+
+.thank-you-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 20px;
     animation: fadeInUp 0.6s ease-out;
+}
+
+.thank-you-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 500px;
+    animation: fadeInUp 0.6s ease-out 0.2s both;
 }
 
 @keyframes fadeInUp {
@@ -562,9 +573,9 @@ body::before {
 .logo-section {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
-    margin: 10px 0;
+    margin: 0;
 }
 
 .thank-you-logo {
@@ -594,18 +605,16 @@ body::before {
     font-size: 1rem;
     color: #4a5568;
     line-height: 1.6;
-    max-width: 500px;
     margin: 0;
+    text-align: left;
 }
 
 /* Benefits Section */
 .benefits-section {
     width: 100%;
-    max-width: 500px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin: 10px 0;
 }
 
 .benefit-card {
@@ -738,8 +747,6 @@ body::before {
 /* Action Buttons */
 .action-buttons {
     width: 100%;
-    max-width: 500px;
-    margin: 10px 0;
 }
 
 .share-button {
@@ -779,9 +786,7 @@ body::before {
 /* Social Links Section */
 .social-links-section {
     width: 100%;
-    max-width: 500px;
-    margin-top: 10px;
-    animation: fadeInUp 0.6s ease-out 0.7s both;
+    animation: fadeInUp 0.6s ease-out 0.4s both;
 }
 
 .follow-text {
@@ -789,6 +794,7 @@ body::before {
     color: #718096;
     margin: 0 0 12px 0;
     font-weight: 500;
+    text-align: left;
 }
 
 .social-links {
@@ -1137,9 +1143,26 @@ body::before {
         justify-content: center;
     }
     
-    .thank-you-container {
-        padding: 15px;
-        height: 100vh;
+    .thank-you-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 40px 0;
+        text-align: center;
+    }
+    
+    .thank-you-left {
+        align-items: center;
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    .thank-you-header {
+        align-items: center;
+    }
+    
+    .thank-you-right {
+        max-width: 100%;
+        align-items: center;
     }
     
     .thank-you-main-title {
@@ -1156,6 +1179,7 @@ body::before {
     
     .thank-you-message {
         font-size: 0.95rem;
+        text-align: center;
     }
     
     .benefit-card {
@@ -1184,6 +1208,14 @@ body::before {
     .share-button {
         padding: 14px 20px;
         font-size: 0.95rem;
+    }
+    
+    .social-links-section {
+        align-items: center;
+    }
+    
+    .follow-text {
+        text-align: center;
     }
 }
 
