@@ -482,7 +482,8 @@ body::before {
     align-items: center;
     text-align: center;
     background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-    overflow: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
 /* Success Icon with Animation */
