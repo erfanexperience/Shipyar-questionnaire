@@ -1255,6 +1255,57 @@ async function submitQuestionnaire() {
     }
 }
 
+// Share link function
+function shareLink() {
+    const url = window.location.href.split('?')[0]; // Get current URL without query params
+    
+    if (navigator.share) {
+        navigator.share({
+            title: 'Join Shippyar Early Access',
+            text: 'Check out Shippyar - the future of global delivery!',
+            url: url
+        }).catch(err => {
+            console.log('Error sharing:', err);
+            copyToClipboard(url);
+        });
+    } else {
+        copyToClipboard(url);
+    }
+}
+
+// Copy to clipboard fallback
+function copyToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Link copied to clipboard!');
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+            fallbackCopy(text);
+        });
+    } else {
+        fallbackCopy(text);
+    }
+}
+
+// Fallback copy method
+function fallbackCopy(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+        document.execCommand('copy');
+        alert('Link copied to clipboard!');
+    } catch (err) {
+        console.error('Fallback copy failed:', err);
+        prompt('Copy this link:', text);
+    }
+    document.body.removeChild(textArea);
+}
+
 // Keyboard navigation
 document.addEventListener('keydown', function(e) {
     if (document.getElementById('questionnaire').classList.contains('active')) {
