@@ -41,7 +41,9 @@ body::before {
 }
 
 .page.active {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 /* Hero Title Container */
