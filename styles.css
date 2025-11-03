@@ -469,189 +469,336 @@ body::before {
 
 /* Thank You Page */
 .thank-you-container {
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
-    padding: 30px 20px;
+    padding: 40px 20px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     text-align: center;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
 }
 
-.social-icons-top {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
+/* Success Icon with Animation */
+.success-icon-wrapper {
     margin-bottom: 30px;
-    width: 100%;
-    padding-top: 20px;
-}
-
-.social-icon-link {
-    color: #3E95D0;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.social-icon-link:hover {
-    color: #FF8C00;
-    transform: translateY(-3px);
-}
-
-.social-icon-link svg {
-    width: 28px;
-    height: 28px;
+    animation: bounceIn 0.8s ease-out;
 }
 
 .success-icon {
     color: #3E95D0;
-    margin-bottom: 20px;
-}
-
-.thank-you-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #2d3748;
-    margin-bottom: 15px;
-}
-
-.thank-you-message {
-    font-size: 1rem;
-    color: #4a5568;
-    margin-bottom: 25px;
-    line-height: 1.5;
-}
-
-.thank-you-date {
-    font-size: 1rem;
-    color: #718096;
-    font-style: italic;
-    margin-bottom: 20px;
-}
-
-.thank-you-social {
-    font-size: 1rem;
-    color: #4a5568;
-    margin-bottom: 40px;
-}
-
-/* Discount Code Section */
-.discount-code-section {
-    background: linear-gradient(135deg, rgba(62, 149, 208, 0.1) 0%, rgba(91, 163, 217, 0.05) 100%);
-    border: 2px solid rgba(62, 149, 208, 0.2);
-    border-radius: 20px;
-    padding: 25px;
-    margin: 20px 0;
     position: relative;
-    overflow: hidden;
-    width: 100%;
+    animation: scalePulse 2s ease-in-out infinite;
 }
 
-.discount-code-section::before {
+.success-icon::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(62, 149, 208, 0.05) 0%, transparent 70%);
-    animation: shimmer 3s ease-in-out infinite;
-    pointer-events: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(62, 149, 208, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: ripple 2s ease-out infinite;
 }
 
-@keyframes shimmer {
-    0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
-    50% { transform: translateX(100%) translateY(100%) rotate(180deg); }
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
-.discount-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #2d3748;
-    margin-bottom: 12px;
+@keyframes scalePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
 }
 
-.discount-message {
-    font-size: 0.95rem;
-    color: #4a5568;
+@keyframes ripple {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Main Title */
+.thank-you-main-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #3E95D0 0%, #FF8C00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+    letter-spacing: -0.5px;
+}
+
+/* Welcome Section */
+.welcome-section {
+    margin-bottom: 35px;
+    animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.thank-you-logo {
+    max-width: 180px;
+    height: auto;
     margin-bottom: 20px;
-    line-height: 1.5;
+    filter: drop-shadow(0 4px 12px rgba(62, 149, 208, 0.2));
+    animation: float 3s ease-in-out infinite;
 }
 
-.discount-code-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.welcome-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2d3748;
     margin-bottom: 15px;
 }
 
-.discount-code {
-    background: linear-gradient(135deg, #3e95d0 0%, #5ba3d9 100%);
-    color: white;
-    font-size: 1.6rem;
-    font-weight: 700;
-    font-family: 'Courier New', monospace;
-    letter-spacing: 3px;
-    padding: 12px 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(62, 149, 208, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    position: relative;
-    overflow: hidden;
+.welcome-message {
+    font-size: 1.1rem;
+    color: #4a5568;
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
-.discount-code::before {
+/* Benefit Cards */
+.benefit-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+    border: 2px solid rgba(62, 149, 208, 0.15);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    text-align: left;
+    box-shadow: 0 4px 20px rgba(62, 149, 208, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease-out both;
+}
+
+.benefit-card:nth-child(1) {
+    animation-delay: 0.6s;
+}
+
+.benefit-card:nth-child(2) {
+    animation-delay: 0.8s;
+}
+
+.benefit-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    animation: codeShine 2s infinite;
+    background: linear-gradient(90deg, transparent, rgba(62, 149, 208, 0.1), transparent);
+    transition: left 0.5s ease;
 }
 
-@keyframes codeShine {
-    0% { left: -100%; }
-    100% { left: 100%; }
+.benefit-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(62, 149, 208, 0.3);
+    box-shadow: 0 8px 30px rgba(62, 149, 208, 0.15);
 }
 
-.copy-button {
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: #3e95d0;
-    padding: 12px 20px;
-    border-radius: 10px;
+.benefit-card:hover::before {
+    left: 100%;
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    line-height: 1;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+    animation: iconBounce 2s ease-in-out infinite;
+}
+
+.benefit-card:nth-child(2) .benefit-icon {
+    animation-delay: 0.3s;
+}
+
+@keyframes iconBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.benefit-content {
+    flex: 1;
+}
+
+.benefit-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.benefit-description {
+    font-size: 0.95rem;
+    color: #718096;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Gift Card Section Special Styling */
+.gift-card-section {
+    background: linear-gradient(135deg, rgba(255, 140, 0, 0.08) 0%, rgba(255, 180, 71, 0.05) 100%);
+    border-color: rgba(255, 140, 0, 0.2);
+}
+
+.gift-card-section:hover {
+    border-color: rgba(255, 140, 0, 0.3);
+    box-shadow: 0 8px 30px rgba(255, 140, 0, 0.15);
+}
+
+/* Discount Section Special Styling */
+.discount-section {
+    background: linear-gradient(135deg, rgba(62, 149, 208, 0.08) 0%, rgba(91, 163, 217, 0.05) 100%);
+}
+
+/* Share Button */
+.share-button {
+    background: linear-gradient(135deg, #3E95D0 0%, #5ba3d9 100%);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 16px 32px;
+    font-size: 1.05rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
+    margin: 30px 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(62, 149, 208, 0.3);
+    animation: fadeInUp 0.6s ease-out 1s both;
+    width: 100%;
+    max-width: 400px;
+    justify-content: center;
+}
+
+.share-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(62, 149, 208, 0.4);
+    background: linear-gradient(135deg, #5ba3d9 0%, #3E95D0 100%);
+}
+
+.share-button:active {
+    transform: translateY(-1px);
+}
+
+.share-button svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Social Follow Section */
+.social-follow-section {
+    margin-top: 20px;
+    animation: fadeInUp 0.6s ease-out 1.2s both;
+    width: 100%;
+}
+
+.social-follow-text {
+    font-size: 1rem;
+    color: #4a5568;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.social-icons-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.social-icon-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: white;
+    border: 2px solid rgba(62, 149, 208, 0.2);
+    border-radius: 12px;
+    color: #3E95D0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(62, 149, 208, 0.1);
+}
+
+.social-icon-button:hover {
+    transform: translateY(-3px);
+    border-color: #3E95D0;
+    background: linear-gradient(135deg, rgba(62, 149, 208, 0.05) 0%, rgba(91, 163, 217, 0.02) 100%);
+    box-shadow: 0 4px 20px rgba(62, 149, 208, 0.2);
+    color: #FF8C00;
+}
+
+.social-icon-button svg {
+    width: 22px;
+    height: 22px;
+}
+
+.social-icon-button span {
     font-size: 0.9rem;
 }
 
-.copy-button:hover {
-    background: rgba(62, 149, 208, 0.1);
-    border-color: rgba(62, 149, 208, 0.4);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(62, 149, 208, 0.2);
-}
-
-.copy-button:active {
-    transform: translateY(0);
-}
-
-.discount-info {
-    font-size: 0.95rem;
-    color: #2d3748;
-    font-weight: 500;
-    line-height: 1.5;
-    margin: 0;
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .social-links {
