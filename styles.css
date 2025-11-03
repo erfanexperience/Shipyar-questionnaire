@@ -1281,6 +1281,8 @@ body::before {
     
     .question-content {
         padding: 20px 15px;
+        width: 95%;
+        max-width: 95%;
     }
     
     .option {
