@@ -473,20 +473,27 @@ body::before {
 .thank-you-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 20px;
-    min-height: 100vh;
+    padding: 20px 20px;
+    height: 100vh;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    overflow: hidden;
 }
 
 /* Success Icon with Animation */
 .success-icon-wrapper {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     animation: bounceIn 0.8s ease-out;
+}
+
+.success-icon svg {
+    width: 60px;
+    height: 60px;
 }
 
 .success-icon {
@@ -547,28 +554,28 @@ body::before {
 
 /* Main Title */
 .thank-you-main-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
     background: linear-gradient(135deg, #3E95D0 0%, #FF8C00 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     animation: fadeInUp 0.6s ease-out 0.2s both;
     letter-spacing: -0.5px;
 }
 
 /* Welcome Section */
 .welcome-section {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     animation: fadeInUp 0.6s ease-out 0.4s both;
     max-width: 700px;
 }
 
 .thank-you-logo {
-    max-width: 180px;
+    max-width: 140px;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     filter: drop-shadow(0 4px 12px rgba(62, 149, 208, 0.2));
     animation: float 3s ease-in-out infinite;
 }
@@ -583,16 +590,16 @@ body::before {
 }
 
 .welcome-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #2d3748;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
 }
 
 .welcome-message {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     color: #4a5568;
-    line-height: 1.7;
+    line-height: 1.5;
     max-width: 500px;
     margin: 0 auto;
 }
@@ -601,10 +608,10 @@ body::before {
 .benefits-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 25px;
+    gap: 20px;
     width: 100%;
     max-width: 900px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     animation: fadeInUp 0.6s ease-out 0.6s both;
 }
 
@@ -613,10 +620,10 @@ body::before {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
     border: 2px solid rgba(62, 149, 208, 0.15);
     border-radius: 20px;
-    padding: 25px;
+    padding: 18px;
     display: flex;
     align-items: flex-start;
-    gap: 20px;
+    gap: 15px;
     text-align: left;
     box-shadow: 0 4px 20px rgba(62, 149, 208, 0.08);
     transition: all 0.3s ease;
@@ -655,7 +662,7 @@ body::before {
 }
 
 .benefit-icon {
-    font-size: 3rem;
+    font-size: 2.5rem;
     line-height: 1;
     flex-shrink: 0;
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
@@ -680,30 +687,72 @@ body::before {
 }
 
 .benefit-title {
-    font-size: 1.15rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #2d3748;
-    margin-bottom: 10px;
-    line-height: 1.4;
+    margin-bottom: 8px;
+    line-height: 1.3;
 }
 
 .benefit-description {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: #718096;
-    line-height: 1.6;
+    line-height: 1.5;
     margin: 0;
 }
 
 .promo-code-text {
-    color: #3E95D0;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    background: linear-gradient(135deg, rgba(62, 149, 208, 0.1) 0%, rgba(91, 163, 217, 0.05) 100%);
-    padding: 4px 12px;
-    border-radius: 8px;
+    color: #FF8C00;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding: 6px 16px;
+    border-radius: 12px;
     display: inline-block;
-    margin-left: 4px;
+    margin-left: 6px;
+    position: relative;
+    animation: promoCodePulse 2s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
+    border: 2px solid rgba(255, 140, 0, 0.3);
+    background-color: rgba(255, 140, 0, 0.1);
+    -webkit-text-fill-color: #FF8C00;
+}
+
+.promo-code-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 165, 0, 0.1) 100%);
+    z-index: -1;
+    animation: promoCodeShine 3s ease-in-out infinite;
+}
+
+@keyframes promoCodePulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 140, 0, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 8px rgba(255, 140, 0, 0);
+    }
+}
+
+@keyframes promoCodeShine {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 /* Gift Card Section Special Styling */
@@ -728,14 +777,14 @@ body::before {
     color: white;
     border: none;
     border-radius: 16px;
-    padding: 16px 32px;
-    font-size: 1.05rem;
+    padding: 12px 28px;
+    font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin: 20px 0;
+    gap: 10px;
+    margin: 10px 0;
     transition: all 0.3s ease;
     box-shadow: 0 4px 20px rgba(62, 149, 208, 0.3);
     animation: fadeInUp 0.6s ease-out 1s both;
@@ -761,15 +810,15 @@ body::before {
 
 /* Social Follow Section */
 .social-follow-section {
-    margin-top: 20px;
+    margin-top: 10px;
     animation: fadeInUp 0.6s ease-out 1.2s both;
     width: 100%;
 }
 
 .social-follow-text {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #4a5568;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     font-weight: 500;
 }
 
